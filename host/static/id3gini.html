@@ -66,7 +66,7 @@
 <body>
     <!-- 个人信息栏 -->
     <div class="header">
-        <h2>unanimous</h2>
+        <h2>id3gini</h2>
         <div class="user-info">
             <span id="userInfo"></span><span> | </span>
             <span id="authToken"></span>
@@ -74,36 +74,39 @@
             <button onclick="logout()">Logout</button>
         </div>
     </div>
-    <div class="modeToggle">
-    <button onclick="setCreateMode()" class="modeBtn">Create</button>
-    <button onclick="setJoinMode()" class="modeBtn">Join</button>
-</div>
     <div>
 <!--        <label for="client_key">临时client_key:</label>-->
 <!--        <input type="text" id="client_key" name="client_key"><br><br>-->
-        <div id="taskID">
-            <label for="task_id">task_id:</label>
-            <input type="text" id="task_id" name="task_id"><br><br>
-        </div>
-        <div id="partyNUM">
-            <label for="party_num">party_num:</label>
-            <input type="number" id="party_num" name="party_num"><br><br>
-        </div>
+<!--        <div id="taskID">-->
+<!--            <label for="task_id">task_id:</label>-->
+<!--            <input type="text" id="task_id" name="task_id"><br><br>-->
+<!--        </div>-->
+<!--        <div id="partyNUM">-->
+<!--            <label for="party_num">party_num:</label>-->
+<!--            <input type="number" id="party_num" name="party_num"><br><br>-->
+<!--        </div>-->
 
-        <button id="createBtn" onclick="create()" class="toggleBtn">Create</button>
-        <button id="joinBtn" onclick="join()" class="toggleBtn">Join</button>
+<!--        <button id="createBtn" onclick="create()" class="toggleBtn">Create</button>-->
+<!--        <button id="joinBtn" onclick="join()" class="toggleBtn">Join</button>-->
     </div>
+
+
+<!--    <label for="party_vote">Party Vote:</label><br>-->
+<!--    <input type="text" id="party_vote" name="party_vote"><br><br>-->
+    <h2>上传文件</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="file" id="file"><br>
+<!--        <input type="text" name="data" id="data" placeholder="输入其他数据"><br>-->
+        <button type="button" onclick="upload()" class="toggleBtn">上传</button>
+    </form>
+    <input type="button" value="开始计算" onclick="compute()" class="toggleBtn">
+
     <div>----------返回结果--------</div>
     <br>
     <div></div>
     <div id="response" ></div>
     <br>
     <div>------------------</div>
-
-    <label for="party_vote">Party Vote:</label><br>
-    <input type="text" id="party_vote" name="party_vote"><br><br>
-    <input type="button" value="开始计算" onclick="compute()" class="toggleBtn">
-
     <script>
         var clientKey=""
         // 在页面加载完成后立即执行的函数
@@ -194,27 +197,54 @@ function join() {
 }
 function compute(){
         // 检查 node 中是否有数据
-    if (Object.keys(node).length === 0) {
-        console.error('Error: No data available in node.');
-        return;
-    }
+    // if (Object.keys(node).length === 0) {
+    //     console.error('Error: No data available in node.');
+    //     return;
+    // }
     document.getElementById("response").innerText=document.getElementById("response").innerText+"       计算中，请等待..."
     // 提取 IP 和端口号
-    var ip = node.ip;
-    var port = node.port;
-    var task_id=node["task_id"];
-    var index=node["index"]
-    var party_num=node["party_num"]
+    // var ip = node.ip;
+    // var port = node.port;
+    // var task_id=node["task_id"];
+    // var index=node["index"]
+    // var party_num=node["party_num"]
     // 构建请求 URL
-    var url = `http://${ip}:${port}/unanimous/compute`;
+    var url = `http://localhost:8088/id3gini/compute`;
     // 准备请求数据
-    var client_key = clientKey;
-    var party_vote = document.getElementById("party_vote").value;
+    // var client_key = clientKey;
+    // var party_vote = document.getElementById("party_vote").value;
+    //
+    // var data = { "client_key":client_key, "party_vote":party_vote,"task_id":task_id,"index":index,"party_num":party_num };
 
-    var data = { "client_key":client_key, "party_vote":party_vote,"task_id":task_id,"index":index,"party_num":party_num };
+    // axios.post(url, data)
+    // .then(function(response) {
+    //     // 检查响应数据中的 code
+    //     if (response.data.code === 200) {
+    //         // 请求成功，处理响应数据
+    //         document.getElementById("response").innerText = JSON.stringify(response.data.data);
+    //     } else {
+    //         // 请求失败，显示错误信息
+    //         console.error('Error:', response.data.message);
+    //     }
+    // })
+    // .catch(function(error) {
+    //     // 请求出错，显示错误信息
+    //     console.error('Error:', error);
+    // });
 
+            // 获取文件和其他数据
+            var file = document.getElementById('file').files[0];
+            var data = {dddd:'dddd'}
 
-    .then(function(response) {
+            // 创建 FormData 对象
+            var formData = new FormData();
+            formData.append('file', file);
+            formData.append('data', data);
+
+            // 发送 POST 请求
+            axios.post(url, formData)
+            .then(function(response) {
+                console.log(response.data)
         // 检查响应数据中的 code
         if (response.data.code === 200) {
             // 请求成功，处理响应数据
@@ -228,6 +258,7 @@ function compute(){
         // 请求出错，显示错误信息
         console.error('Error:', error);
     });
+
 
 }
 

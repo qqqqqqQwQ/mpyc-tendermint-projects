@@ -1,11 +1,13 @@
 from quart import Quart, request, jsonify,send_file,redirect,url_for,make_response
 from quart_cors import cors
-import time
 from datetime import datetime, timedelta
 from secrets import token_hex
 from unanimous.utils import get_task_status
 from unanimous import route as Unanimous
 from mpcData import ComputeData
+import platform
+import os
+import subprocess
 from utils import check_auth_token_validity
 app = Quart(__name__)
 cors(app)
@@ -25,36 +27,22 @@ async def dddd():
     if not auth_token:
         return redirect(url_for('login'))
     else:
-        return redirect(url_for('index'))
+        return redirect(url_for('id3gini'))
 @app.route('/login',methods=['GET'])
 async def login():
     auth_token = request.cookies.get('auth_token')
     if not auth_token:
         return await send_file('static/login.html')
     else:
-        return redirect(url_for('index'))
+        return redirect(url_for('id3gini'))
 
-@app.route('/index', methods=['GET'])
-async def index():
-    auth_token = request.cookies.get('auth_token')
-    print(auth_token)
-    if not auth_token:
-        return redirect(url_for('login', redirect='/index'))
-    else:
-        return await send_file('static/index.html')
-@app.route('/unanimous', methods=['GET'])
-async def unanimous():
+@app.route('/id3gini', methods=['GET'])
+async def id3gini():
     auth_token = request.cookies.get('auth_token')
     if not auth_token:
-        return redirect(url_for('login', redirect='/unanimous'))
+        return redirect(url_for('login', redirect='/id3gini'))
     else:
-        return await send_file('static/unanimous.html')
-# @app.route('/unanimous/login', methods=['POST'])
-# async def unanimous_login():
-#     data=await request.get_json()
-#     ret= await unanimous.login(data)
-#     return jsonify(ret)
-
+        return await send_file('static/id3gini.html')
 
 
 # 登录接口
@@ -104,34 +92,67 @@ async def logout():
 
     return response
 
+@app.route('/id3gini/compute', methods=['POST'])
+async def test(): # {vote,key,task_id}->{200,data}
+    data =await request.get_json()  # 获取POST请求中的JSON数据
+    print("接收到前端的数据，",data)
+    try:
+        # # 0.验证输入，包括用户身份，避免同时参与多个计算
+        # check_client(data)
+        # # 1.找到task路径,验证任务合法性
+        # abc=compute_task(data)
+        # url=os.path.join(abc, "unanimous.py")
+        # task_id=data['task_id']
+        # #用task_id找到party_num,目前不实现node中存数据，所以party_num先由客户端提供
+        # # task=get_task_by_id(task_id)
+        # party_num=str(data['party_num'])
+        #
+        # index=str(data['index'])
+        # party_vote=str(data['party_vote'])
+        folder_path='id3gini'
+        current_os = platform.system()
+        # url=os.path.join(".py")
+        task_num=6
+        # python_command = f"python {folder_path} -M{party_num} -I{index} {party_vote} -C party{party_num}_{index}.ini"
+        python_command = f"python id3gini.py -i {task_num}"
 
-@app.route('/unanimous/prepare', methods=['POST'])
-async def unanimous_prepare(): # {client_key,patry_num}-》{node:{ip,port,index,client_key}}
-    data=await request.get_json()
-    ret= await Unanimous.TaskCreate(data)
-    return jsonify(ret)
-@app.route('/unanimous/join', methods=['POST'])
-async def unanimous_join(): # {task_id,client_key}-》{node:{ip,port,index,client_key}}
-    data=await request.get_json()
-    ret= await Unanimous.TaskJoin(data)
-    return jsonify(ret)
-@app.route('/unanimous/status', methods=['POST'])
-async def unanimous_status():# {task_id,client_key}-》{status,message}
-    data=await request.get_json()
-    status=get_task_status(data["task_id"])
-    while status!=2:  # 设置超时时间为30秒
-        print("正等待task的status变成2")
-        # return jsonify({"status": status,"message": "请等待其他参与方加入..."})
-        time.sleep(1)  # 休眠1秒，减轻服务器压力
-    return jsonify({"status": status,"message":"多方计算已准备就绪"})
+        if current_os == "Windows":
+            command = f"cd /d {folder_path} && {python_command}"
+        else:
+            command = f"cd {folder_path} && {python_command}"
+        print("这是计算命令：",command)
+        # 2.计算
+        ret = subprocess.run(command,stdout=subprocess.PIPE, shell=True)
+        # output = ret.stdout.decode()
+        output = ret.stdout.decode('utf-8','ignore')
+        print("计算结果：",output)
+        return jsonify({'code': 200, 'data': output})
+    except ValueError as e:
+        print(e)  # 打印错误信息
+        return jsonify({'code':500, 'message':str(e)})
 
 
-@app.route('/ot', methods=['GET'])
-def ot():
-    return send_file('static/ot.html')
-@app.route('/sort', methods=['GET'])
-def sort():
-    return send_file('static/sort.html')
+# @app.route('/unanimous/prepare', methods=['POST'])
+# async def unanimous_prepare(): # {client_key,patry_num}-》{node:{ip,port,index,client_key}}
+#     data=await request.get_json()
+#     ret= await Unanimous.TaskCreate(data)
+#     return jsonify(ret)
+# @app.route('/unanimous/join', methods=['POST'])
+# async def unanimous_join(): # {task_id,client_key}-》{node:{ip,port,index,client_key}}
+#     data=await request.get_json()
+#     ret= await Unanimous.TaskJoin(data)
+#     return jsonify(ret)
+# @app.route('/unanimous/status', methods=['POST'])
+# async def unanimous_status():# {task_id,client_key}-》{status,message}
+#     data=await request.get_json()
+#     status=get_task_status(data["task_id"])
+#     while status!=2:  # 设置超时时间为30秒
+#         print("正等待task的status变成2")
+#         # return jsonify({"status": status,"message": "请等待其他参与方加入..."})
+#         time.sleep(1)  # 休眠1秒，减轻服务器压力
+#     return jsonify({"status": status,"message":"多方计算已准备就绪"})
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8088, debug=True)  # 在端口80上运行网关服务
