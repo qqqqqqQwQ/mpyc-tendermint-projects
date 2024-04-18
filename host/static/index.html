@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation</title>
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info span {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>Demos Navigation</h2>
+        <div class="user-info">
+            <span id="userInfo"></span><span> | </span>
+            <span id="authToken"></span>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+    <ul>
+        <li><a href="/unanimous">unanimous</a></li>
+        <li><a href="/ot">ot</a></li>
+        <li><a href="/sort">sort</a></li>
+    </ul>
+
+    <script>
+        // 在页面加载完成后立即执行的函数
+        window.onload = function () {
+            // 获取 cookie 中的 auth_token
+            var authToken = document.cookie.replace(/(?:(?:^|.*;\s*)auth_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+            // 将 auth_token 显示在页面上
+            document.getElementById("authToken").innerText = "Auth Token: " + authToken;
+
+            // 这里可以根据需要进行其他操作，例如发送请求，根据 auth_token 获取其他数据等
+            // 获取 cookie 中的 client_key
+            var clientKey = document.cookie.replace(/(?:(?:^|.*;\s*)client_key\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+            // 将 client_key 显示在页面上
+            document.getElementById("userInfo").innerText = "Client Key: " + clientKey;
+        };
+
+        // 定义一个函数，用于发送退出登录的请求
+        function logout() {
+            // 创建一个 XHR 对象
+            var xhr = new XMLHttpRequest();
+            // 设置 POST 请求，发送到退出登录的 URL
+            xhr.open("POST", "/logout", true);
+            // 发送请求
+            xhr.send();
+            // 监听响应
+            xhr.onreadystatechange = function () {
+                // 当响应完成时
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    // 如果响应状态码为 200，表示退出登录成功
+                    if (xhr.status == 200) {
+                        // 刷新页面以更新认证状态
+                        window.location.reload();
+                    } else {
+                        // 否则，显示错误消息
+                        alert("Logout failed. Please try again.");
+                    }
+                }
+            };
+        }
+    </script>
+</body>
+</html>

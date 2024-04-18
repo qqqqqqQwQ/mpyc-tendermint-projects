@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全多方计算平台</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 300px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h4 {
+            margin: 0 0 20px 0;
+            color: #333;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .input-group input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #007bff;
+        }
+
+        .btn-login {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-login:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h4>欢迎使用安全多方计算服务</h4>
+        <div class="input-group">
+            <input id="clientKeyInput" type="text" placeholder="请输入Client Key">
+
+        </div>
+        <button class="btn-login" onclick="login()">登录</button>
+    </div>
+
+    <script>
+
+        function login() {
+            var clientKey = document.getElementById('clientKeyInput').value;
+            var urlParams = new URLSearchParams(window.location.search);
+            var redirect_url = urlParams.get('redirect') || '/index';
+            // 创建一个 XHR 对象
+            var xhr = new XMLHttpRequest();
+            // 设置 POST 请求，发送到指定的 URL
+            xhr.open("POST", "http://localhost:8088/login", true);
+            // 设置请求头，告诉服务器发送的数据类型
+            xhr.setRequestHeader("Content-Type", "application/json");
+            // 发送请求并将客户端密钥作为 JSON 格式发送
+            console.log("clientKey:",clientKey)
+            console.log("redirect_url:",redirect_url)
+            xhr.send(JSON.stringify({ client_key: clientKey ,redirect_url:redirect_url}));
+            // 监听响应
+            xhr.onreadystatechange = function () {
+                // 当响应完成时
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    // 如果响应状态码为 200，表示登录成功
+                    if (xhr.status == 200) {
+                        var authCookie = xhr.getResponseHeader('Set-Cookie');
+                        // 将认证cookie存储在浏览器中
+                        document.cookie = authCookie;
+                        console.log(authCookie)
+                        // 重定向到指定页面
+                        window.location.href = redirect_url;
+                    } else {
+                        // 否则，显示错误消息
+                        alert("登录失败，请重试！");
+                    }
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>
