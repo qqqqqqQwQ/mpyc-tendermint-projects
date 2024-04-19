@@ -73,7 +73,7 @@ async def id3(T, R) -> asyncio.Future:
     stop = (sizeT <= int(args.epsilon * len(T))) + (mx == sizeT)
     if not (R and await mpc.is_zero_public(stop)):
         i = await mpc.output(i)
-        logging.info(f'Leaf node label {i}')
+        # logging.info(f'Leaf node label {i}')
         tree = i
     else:
         T_SC = [mpc.schur_prod(T, v) for v in S[C]]
@@ -82,7 +82,7 @@ async def id3(T, R) -> asyncio.Future:
         del T_SC, gains  # release memory
         A = list(R)[k]
         T_SA = [mpc.schur_prod(T, v) for v in S[A]]
-        logging.info(f'Attribute node {A}')
+        # logging.info(f'Attribute node {A}')
         if args.parallel_subtrees:
             subtrees = await mpc.gather([id3(Tj, R.difference([A])) for Tj in T_SA])
         else:
@@ -168,7 +168,8 @@ async def main():
     tree = await id3(T, frozenset(range(d)).difference([C]))
     await mpc.shutdown()
 
-    print(f'Decision tree of depth {depth(tree)} and size {size(tree)}: ', end='')
+    print(f'Decision tree of depth {depth(tree)} and size {size(tree)}: \n', end='')
+    print('TreeOutPutStartBelow')
     if args.no_pretty_tree:
         print(tree)
     else:

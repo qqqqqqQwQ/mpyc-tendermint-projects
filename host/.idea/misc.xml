@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="mpyc" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="mpyc" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (host)" project-jdk-type="Python SDK" />
 </project>

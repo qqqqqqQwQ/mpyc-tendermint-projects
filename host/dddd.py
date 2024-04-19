@@ -122,10 +122,19 @@ async def test(): # {vote,key,task_id}->{200,data}
             command = f"cd {folder_path} && {python_command}"
         print("这是计算命令：",command)
         # 2.计算
-        ret = subprocess.run(command,stdout=subprocess.PIPE, shell=True)
+        ret = subprocess.run(command,stdout=subprocess.PIPE, shell=True, encoding='utf-8')
         # output = ret.stdout.decode()
-        output = ret.stdout.decode('utf-8','ignore')
-        print("计算结果：",output)
+        output = ret.stdout.splitlines()
+        outputInLines = []
+        sign = False
+        for s in output:
+            if not sign:
+                if s == 'TreeOutPutStartBelow':
+                    sign = True
+            else:
+                outputInLines.append(s)
+        output = '\n'.join(outputInLines)
+        print("计算结果：", output)
         return jsonify({'code': 200, 'data': output})
     except ValueError as e:
         print(e)  # 打印错误信息
