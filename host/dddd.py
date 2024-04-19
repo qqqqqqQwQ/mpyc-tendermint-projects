@@ -133,6 +133,7 @@ async def test(): # {vote,key,task_id}->{200,data}
                     sign = True
             else:
                 outputInLines.append(s)
+        outputInLines.pop() # 弹出第一行空格
         output = '\n'.join(outputInLines)
         print("计算结果：", output)
         return jsonify({'code': 200, 'data': output})
