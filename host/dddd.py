@@ -90,7 +90,7 @@ async def test():
     # data =await request.get_json()  # 获取POST请求中的JSON数据
 
     print("接收到前端的数据，",file)
-    file_path=os.path.join(os.getcwd(), 'id3gini','data','id3', file.filename)
+    file_path=os.path.join(os.getcwd(), 'id3gini','data','id3', 'loan_predication')
     await file.save(file_path)
     print(file_path)
     dataClean.process_excel_file(file_path).to_csv(file_path, index=False)
@@ -99,7 +99,7 @@ async def test():
         folder_path='id3gini'
         current_os = platform.system()
         # url=os.path.join(".py")
-        task_num=6
+        task_num=7
         # python_command = f"python {folder_path} -M{party_num} -I{index} {party_vote} -C party{party_num}_{index}.ini"
         python_command = f"python id3gini.py -i {task_num}"
 
