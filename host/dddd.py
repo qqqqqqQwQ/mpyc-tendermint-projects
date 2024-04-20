@@ -1,3 +1,4 @@
+
 from quart import Quart, request, jsonify,send_file,redirect,url_for,make_response
 from quart_cors import cors
 from datetime import datetime, timedelta
@@ -5,10 +6,10 @@ from secrets import token_hex
 from unanimous.utils import get_task_status
 from unanimous import route as Unanimous
 from mpcData import ComputeData
+from utils import dataClean
 import platform
 import os
 import subprocess
-from utils import check_auth_token_validity
 app = Quart(__name__)
 cors(app)
 # 假设这里有一个字典，用于存储用户的目标页面信息
@@ -16,18 +17,14 @@ user_target_pages = {}
 
 host_path="localhost"
 
-# 维护所有数据集合
-# 1.hosts=[{ip:"6.6.6.6",ports:[{port:"11",status:0},{port:"12",status:0}],remain:30},{ip:"7.7.7.7",ports:[{},{}],remain:60}]
-# 2.tasks=[{task_name:"unanimous",task_id:xxx,task_passwd:"000",party_num:3,presents:0,status:1,nodes:[{ip:"6.6.6.6",port:"33",client_key:"66",host_index:'0',index:"1"},{}]},{}]
-
 # 前端页面，返回登录页面
 @app.route('/',methods=['GET'])
 async def dddd():
-    auth_token = request.cookies.get('auth_token')
-    if not auth_token:
-        return redirect(url_for('login'))
-    else:
-        return redirect(url_for('id3gini'))
+    # auth_token = request.cookies.get('auth_token')
+    # if not auth_token:
+    #     return redirect(url_for('login'))
+    # else:
+    return redirect(url_for('id3gini'))
 @app.route('/login',methods=['GET'])
 async def login():
     auth_token = request.cookies.get('auth_token')
@@ -39,15 +36,11 @@ async def login():
 @app.route('/id3gini', methods=['GET'])
 async def id3gini():
     auth_token = request.cookies.get('auth_token')
-    if not auth_token:
-        return redirect(url_for('login', redirect='/id3gini'))
-    else:
-        return await send_file('static/id3gini.html')
-
-
+    # if not auth_token:
+    #     return redirect(url_for('login', redirect='/id3gini'))
+    # else:
+    return await send_file('static/id3gini.html')
 # 登录接口
-
-
 @app.route('/login', methods=['POST'])
 async def login_post():
     # 假设这里是验证用户登录的逻辑
@@ -74,8 +67,6 @@ async def login_post():
     else:
         # 如果客户端密钥无效，则返回 401 Unauthorized 错误
         return jsonify({'error': 'Invalid client key'}),401
-
-
 @app.route('/logout', methods=['POST'])
 async def logout():
     # 创建响应对象
@@ -93,22 +84,18 @@ async def logout():
     return response
 
 @app.route('/id3gini/compute', methods=['POST'])
-async def test(): # {vote,key,task_id}->{200,data}
-    data =await request.get_json()  # 获取POST请求中的JSON数据
-    print("接收到前端的数据，",data)
+async def test():
+    # 获取上传的文件对象
+    file = (await request.files)['file']
+    # data =await request.get_json()  # 获取POST请求中的JSON数据
+
+    print("接收到前端的数据，",file)
+    file_path=os.path.join(os.getcwd(), 'id3gini','data','id3', file.filename)
+    await file.save(file_path)
+    print(file_path)
+    dataClean.process_excel_file(file_path).to_csv(file_path, index=False)
+
     try:
-        # # 0.验证输入，包括用户身份，避免同时参与多个计算
-        # check_client(data)
-        # # 1.找到task路径,验证任务合法性
-        # abc=compute_task(data)
-        # url=os.path.join(abc, "unanimous.py")
-        # task_id=data['task_id']
-        # #用task_id找到party_num,目前不实现node中存数据，所以party_num先由客户端提供
-        # # task=get_task_by_id(task_id)
-        # party_num=str(data['party_num'])
-        #
-        # index=str(data['index'])
-        # party_vote=str(data['party_vote'])
         folder_path='id3gini'
         current_os = platform.system()
         # url=os.path.join(".py")
