@@ -6,7 +6,7 @@ from secrets import token_hex
 from unanimous.utils import get_task_status
 from unanimous import route as Unanimous
 from mpcData import ComputeData
-from utils import dataClean,file2pd,text2model
+from utils import dataClean,file2pd,text2model,modeltxtRecord
 import platform
 import os
 import subprocess
@@ -124,8 +124,10 @@ async def test():
         output = '\n'.join(outputInLines)
         print("计算结果：", output)
 
+        features = ['Credit_History', 'Self_Employed', 'ApplicantIncome', 'LoanAmount', 'CoapplicantIncome','Property_Area', 'Education', 'Dependents', 'Gender', 'Married']
         # 尝试将结果变成决策树模型
-        text2model.saveModel(output)
+        text2model.saveModel(output,features)
+        modeltxtRecord.save_txt_file(output)
         return jsonify({'code': 200, 'data': output})
     except Exception as e:
         print(e)  # 打印错误信息
@@ -135,4 +137,4 @@ async def test():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8088, debug=True)  # 在端口8088上运行服务
+    app.run(host='0.0.0.0', port=18088, debug=True)  # 在端口8088上运行服务

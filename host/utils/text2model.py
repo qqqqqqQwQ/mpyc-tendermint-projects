@@ -1,7 +1,7 @@
 from sklearn.tree import DecisionTreeClassifier
 import pickle
 import os
-
+from datetime import datetime
 
 # 保存模型到文件
 
@@ -55,12 +55,16 @@ def saveModel(tree_text,features):
     model = DecisionTreeClassifier(max_depth=5)
     model.fit(X, y)
     current_directory = os.getcwd()
-    save_directory = os.path.join(current_directory, 'models')
+    save_directory = os.path.join(current_directory, 'models','model_pkls')
     # 如果目录不存在，则创建它
     if not os.path.exists(save_directory):
         os.makedirs(save_directory)
     # 定义模型保存路径
-    model_path = os.path.join(save_directory, 'decision_tree_model.pkl')
+    current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+
+    # 构造文件名
+    file_name = f'decision_tree_model_{current_time}.pkl'
+    model_path = os.path.join(save_directory, file_name)
     # 保存模型到文件
     with open(model_path, 'wb') as f:
         pickle.dump(model, f)
