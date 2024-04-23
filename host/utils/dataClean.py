@@ -120,26 +120,15 @@ def map_amount_term_range(term):
         return 'M'
 
 
-def process_excel_file(file_path):
-    # 验证文件类型是否为 Excel
-    try:
-        df = pd.read_csv(file_path)
-        print("1111")
-    except Exception as e:
-        raise ValueError("Error: Invalid Excel file.")
-
-
+def process_excel_file(df: object) -> object:
     # 清除不需要的列
     # df = df.drop(columns=['不需要的列1', '不需要的列2'])
-
 
     # 数字类型数据转换成离散的类别
     df['ApplicantIncome'] = df['ApplicantIncome'].apply(map_income_range)
     df['CoapplicantIncome'] = df['CoapplicantIncome'].apply(map_income_range)
     df['LoanAmount'] = df['LoanAmount'].apply(map_amount_range)
     df['Loan_Amount_Term'] = df['Loan_Amount_Term'].apply(map_amount_term_range)
-
-
     return df
 
 

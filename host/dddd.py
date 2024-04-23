@@ -6,10 +6,11 @@ from secrets import token_hex
 from unanimous.utils import get_task_status
 from unanimous import route as Unanimous
 from mpcData import ComputeData
-from utils import dataClean
+from utils import dataClean,file2pd,text2model
 import platform
 import os
 import subprocess
+import pandas as pd
 app = Quart(__name__)
 cors(app)
 # 假设这里有一个字典，用于存储用户的目标页面信息
@@ -85,17 +86,16 @@ async def logout():
 
 @app.route('/id3gini/compute', methods=['POST'])
 async def test():
-    # 获取上传的文件对象
-    file = (await request.files)['file']
-    # data =await request.get_json()  # 获取POST请求中的JSON数据
-
-    print("接收到前端的数据，",file)
-    file_path=os.path.join(os.getcwd(), 'id3gini','data','id3', 'loan_predication')
-    await file.save(file_path)
-    print(file_path)
-    dataClean.process_excel_file(file_path).to_csv(file_path, index=False)
-
     try:
+        file_path = os.path.join(os.getcwd(), 'id3gini', 'data', 'id3', 'loan_predication.csv')
+        file = (await request.files)['file']
+        print("接收到前端的数据，", file)
+        data = file2pd.process_file(file)
+        # data = pd.DataFrame(data)
+        # 将数据处理好后放进文件夹中可以直接被id3gini调用
+        dataClean.process_excel_file(data).to_csv(file_path, index=False)
+
+        # 以下是多方计算
         folder_path='id3gini'
         current_os = platform.system()
         # url=os.path.join(".py")
@@ -123,33 +123,16 @@ async def test():
         outputInLines.pop() # 弹出第一行空格
         output = '\n'.join(outputInLines)
         print("计算结果：", output)
+
+        # 尝试将结果变成决策树模型
+        text2model.saveModel(output)
         return jsonify({'code': 200, 'data': output})
-    except ValueError as e:
+    except Exception as e:
         print(e)  # 打印错误信息
         return jsonify({'code':500, 'message':str(e)})
 
 
-# @app.route('/unanimous/prepare', methods=['POST'])
-# async def unanimous_prepare(): # {client_key,patry_num}-》{node:{ip,port,index,client_key}}
-#     data=await request.get_json()
-#     ret= await Unanimous.TaskCreate(data)
-#     return jsonify(ret)
-# @app.route('/unanimous/join', methods=['POST'])
-# async def unanimous_join(): # {task_id,client_key}-》{node:{ip,port,index,client_key}}
-#     data=await request.get_json()
-#     ret= await Unanimous.TaskJoin(data)
-#     return jsonify(ret)
-# @app.route('/unanimous/status', methods=['POST'])
-# async def unanimous_status():# {task_id,client_key}-》{status,message}
-#     data=await request.get_json()
-#     status=get_task_status(data["task_id"])
-#     while status!=2:  # 设置超时时间为30秒
-#         print("正等待task的status变成2")
-#         # return jsonify({"status": status,"message": "请等待其他参与方加入..."})
-#         time.sleep(1)  # 休眠1秒，减轻服务器压力
-#     return jsonify({"status": status,"message":"多方计算已准备就绪"})
-
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8088, debug=True)  # 在端口80上运行网关服务
+    app.run(host='0.0.0.0', port=8088, debug=True)  # 在端口8088上运行服务
