@@ -1,37 +1,36 @@
+<template>
+  <div class="common-layout">
+    <el-container>
 
-<template >
-  <div>
-    <h1 :msg="msg">{{ msg }}</h1>
-    <HelloWorld :msg="msg" />
-    <input v-model="msg" type="text" />
+      <el-container>
+        <!-- <el-aside width="200px" class="aside">
+          <CommonAside />
+        </el-aside> -->
+        <el-container>
+          <el-header class="header" height="90px">
+            <CommonHead />
+
+          </el-header>
+          <!-- <el-header class="header" height="90px">
+            <LoginHead />
+
+          </el-header> -->
+          <el-main class="main">备用1</el-main>
+          <el-footer class="Footer">Footer</el-footer>
+        </el-container>
+      </el-container>
+    </el-container>
   </div>
 </template>
 
-<script lang="ts" scoped>
-  import { defineComponent,onMounted, ref } from 'vue';
-  import HelloWorld from "@/components/HelloWorld.vue";
-  export default defineComponent({
-    // 需要启用子组件作为模板
-    components: {
-      HelloWorld ,
-    },
+<script lang="ts" setup>
+import { defineComponent, onMounted, ref } from 'vue';
+import CommonAside from "@/components/CommonAside.vue";
+import CommonHead from "@/components/CommonHeader.vue";
+import LoginHead from "@/components/LoginHeader.vue";
 
-    
-    // 定义一些数据并 `return` 给 `<template />` 用
-    setup() {
-      // 使用 ref 创建响应式变量
-      const msg = ref("网页1");
 
-      // 不要忘记 `return` ，否则 `<template />` 拿不到数据
-      return {
-        msg,
-      }
-  },
-})
 
 </script>
 
-<style>
-
-
-</style>
+<style></style>

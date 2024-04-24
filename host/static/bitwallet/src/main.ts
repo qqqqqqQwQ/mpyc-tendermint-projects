@@ -10,3 +10,4 @@ import 'element-plus/dist/index.css'
 
 
 createApp(App).use(ElementPlus).use(store).use(VueAxios,axios).use(router).mount('#app')
+App.config.globalProperties.$axios = axios;

@@ -22,7 +22,7 @@
             </el-icon>
             <template #title>{{ item.label }}</template>
         </el-menu-item>
-        
+
         <el-menu-item @click="clickMenu(item)" v-for=" item in aboutUsMenu" :key="item.name" :index="item.name">
             <el-icon>
                 <Promotion />
@@ -52,8 +52,8 @@
             <template #title>{{ item.label }}</template>
         </el-menu-item>
 
-        <el-button type="primary" size="large" plain>登录</el-button>
-        <el-button type="default" size="large" plain>注册</el-button>
+        <el-button type="primary" size="large" plain @click="clickLogin()">登录</el-button>
+        <el-button type="default" size="large" plain @click="clickRegister()">注册</el-button>
     </el-menu>
 </template>
 
@@ -83,6 +83,12 @@ const clickMenu = (item: any) => {
     console.log(item)
     router.push(item.path)
 }
+const clickLogin = () => {
+    router.push("/login")
+}
+const clickRegister = () => {
+    router.push("/register")
+}
 const menuData = ref([
     {
         path: "/",
@@ -98,14 +104,14 @@ const menuData = ref([
         label: "导航",
         children: [
             {
-                path: "/main/testone",
+                path: "/testone",
                 name: "TestOne",
                 component: () => import("@/views/TestOneView.vue"),
                 label: "测试一路由",
 
             },
             {
-                path: "/main/testtwo",
+                path: "/testtwo",
                 name: "TestTwo",
                 component: () => import("@/views/TestTwoView.vue"),
                 label: "测试二路由",

@@ -86,14 +86,14 @@ const menuData = ref([
         label: "导航",
         children: [
             {
-                path: "/main/testone",
+                path: "/testone",
                 name: "TestOne",
                 component: () => import("@/views/TestOneView.vue"),
                 label: "测试一路由",
 
             },
             {
-                path: "/main/testtwo",
+                path: "/testtwo",
                 name: "TestTwo",
                 component: () => import("@/views/TestTwoView.vue"),
                 label: "测试二路由",
@@ -147,7 +147,7 @@ const hasChildren = computed(() => {
     text-align: center;
     justify-content: center;
     position: relative;
-    border:0px;
+    border: 0px;
 }
 
 .menutitle {
@@ -159,7 +159,7 @@ const hasChildren = computed(() => {
 .line {
     height: 2px;
     width: 200px;
-    color:#fff;
+    color: #fff;
     background-color: #fff;
     margin-bottom: 30px;
     border-top: 1px solid;

@@ -14,22 +14,24 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/LoginView.vue"),
   },
   {
+    path: "/register",
+    name: "register",
+    component: () => import("@/views/RegisterView.vue"),
+  },
+  {
     path: "/main",
     name: "main",
     component: import("@/views/NavigateView.vue"),
-    // 注意：这里是二级路由，在 `path` 的前面没有 `/`
-    children: [
-      {
-        path: "testone",
-        name: "TestOne",
-        component: () => import("@/views/TestOneView.vue"),
-      },
-      {
-        path: "testtwo",
-        name: "TestTwo",
-        component: () => import("@/views/TestTwoView.vue"),
-      },
-    ],
+  },
+  {
+    path: "/testone",
+    name: "TestOne",
+    component: () => import("@/views/TestOneView.vue"),
+  },
+  {
+    path: "/testtwo",
+    name: "TestTwo",
+    component: () => import("@/views/TestTwoView.vue"),
   },
   {
     path: "/personinfo",
@@ -47,10 +49,10 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/AboutUs.vue"),
   },
   {
-    path:"/evaluation",
-    name:"evaluation",
-    component:()=>import("@/views/EvaluationView.vue")
-  }
+    path: "/evaluation",
+    name: "evaluation",
+    component: () => import("@/views/EvaluationView.vue"),
+  },
   // {
   //   path: '/register',
   //   name: 'register',
