@@ -16,123 +16,194 @@ Loan_Status（贷款状态）： 表示贷款是否批准的标志，可能是�
 
 数据处理：
 1.多出来的其他的标签全部清除，缺失的标签先不管，看看多方计算时会怎么样先
-2.所有数字值必须变成字符串，不然比较时候数字和字符会乱
+
 """
 def map_income_range(income):
-    if not isinstance(income, (int, float)) or income == '' or pd.isna(income):
-        return ""
+    if pd.isna(income):  # 如果值为空，则不处理
+        return -1
+    # 尝试将值转换为数字，如果失败则返回空
+    try:
+        income_numeric = pd.to_numeric(income)
+    except:
+        return -1
     if income < 1000:
-        return 'A'
+        return 0
     elif income < 2000:
-        return 'B'
+        return 1
     elif income < 3000:
-        return 'C'
+        return 2
     elif income < 4000:
-        return 'D'
+        return 3
     elif income < 5000:
-        return 'E'
+        return 4
     elif income < 6000:
-        return 'F'
+        return 5
     elif income < 7000:
-        return 'G'
+        return 6
     elif income < 8000:
-        return 'H'
+        return 7
     elif income < 9000:
-        return 'I'
+        return 8
     elif income < 10000:
-        return 'J'
+        return 9
     elif income < 15000:
-        return 'K'
+        return 10
     elif income < 20000:
-        return 'L'
+        return 11
     else:
-        # 尝试将值转换为数字，如果失败则返回空
-        try:
-            income_numeric = pd.to_numeric(income)
-        except:
-            return ""
-        return 'M'
+        return 12
 
 def map_amount_range(amount):
-    if not isinstance(amount, (int, float)) or amount == '' or pd.isna(amount):
-        return ""
+    if pd.isna(amount):  # 如果值为空，则不处理
+        return 15
+    # 尝试将值转换为数字，如果失败则返回空
+    try:
+        income_numeric = pd.to_numeric(amount)
+    except:
+        return 15
     if amount < 100:
-        return 'A'
+        return 0
     elif amount < 200:
-        return 'B'
+        return 1
     elif amount < 300:
-        return 'C'
+        return 2
     elif amount < 400:
-        return 'D'
+        return 3
     elif amount < 500:
-        return 'E'
+        return 4
     elif amount < 600:
-        return 'F'
+        return 5
     elif amount < 700:
-        return 'G'
+        return 6
     elif amount < 800:
-        return 'H'
+        return 7
     elif amount < 900:
-        return 'I'
+        return 8
     elif amount < 1000:
-        return 'J'
+        return 9
     elif amount < 1500:
-        return 'K'
+        return 10
     elif amount < 2000:
-        return 'L'
+        return 11
     else:
-        return 'M'
+        return 12
 
 def map_amount_term_range(term):
-    if not isinstance(term, (int, float)) or term == '' or pd.isna(term):
-        return ""
-    if term < 180:
-        return 'A'
-    elif term < 360:
-        return 'B'
-    elif term < 540:
-        return 'C'
-    elif term < 720:
-        return 'D'
-    elif term < 900:
-        return 'E'
-    elif term < 1080:
-        return 'F'
-    elif term < 1260:
-        return 'G'
-    elif term < 1440:
-        return 'H'
-    elif term < 1620:
-        return 'I'
-    elif term < 1800:
-        return 'J'
-    else:
-        # 尝试将值转换为数字，如果失败则返回空
-        try:
-            income_numeric = pd.to_numeric(term)
-        except:
-            return ""
-        return 'M'
-
-def num2str(num):
+    if pd.isna(term):  # 如果值为空，则不处理
+        return -1
+    # 尝试将值转换为数字，如果失败则返回空
     try:
-        num=int(num)
-    except Exception:
-        1
-    finally:
-        return str(num)
+        income_numeric = pd.to_numeric(term)
+    except:
+        return -1
+    if term < 180:
+        return 0
+    elif term < 360:
+        return 1
+    elif term < 540:
+        return 2
+    elif term < 720:
+        return 3
+    elif term < 900:
+        return 4
+    elif term < 1080:
+        return 5
+    elif term < 1260:
+        return 6
+    elif term < 1440:
+        return 7
+    elif term < 1620:
+        return 8
+    elif term < 1800:
+        return 9
+    else:
+        return 10
 
+def map_gender(gender):
+    if gender == "Male":
+        return 1
+    elif gender == "Female":
+        return 0
+    else:
+        return -1
+
+def map_Married(m):
+    if m == "Yes":
+        return 1
+    elif m == "No":
+        return 0
+    else:
+        return -1
+def map_Dependents(m):
+    if m == "0":
+        return 0
+    elif m == "1":
+        return 1
+    elif m == "2":
+        return 2
+    else:
+        return 3
+def map_Education(m):
+    if m == "Graduate":
+        return 0
+    elif m == "Not Graduate":
+        return 1
+    else:
+        return 2
+def map_Self_Employed(m):
+    if m == "No":
+        return 0
+    elif m == "Yes":
+        return 1
+    else:
+        return 2
+def map_Self_Employed(m):
+    if m == "No":
+        return 0
+    elif m == "Yes":
+        return 1
+    else:
+        return 2
+def map_Property_Area(m):
+    if m == "Rural":
+        return 0
+    elif m == "Urban":
+        return 1
+    elif m == "Semiurban":
+        return 2
+    else:
+        return 3
+def map_Credit_History(m):
+    if m == "0":
+        return 0
+    elif m == "1":
+        return 1
+    else:
+        return 2
+def map_Loan_Status(m):
+    if m == "Y":
+        return 0
+    elif m == "N":
+        return 1
+    else:
+        return 2
 def process_excel_file(df: pd.DataFrame) -> pd.DataFrame:
     # 清除不需要的列
     # df = df.drop(columns=['不需要的列1', '不需要的列2'])
 
     # 数字类型数据转换成离散的类别
+    df['Gender'] = df['Gender'].apply(map_gender)
+    df['Married'] = df['Married'].apply(map_Married)
+    df['Dependents'] = df['Dependents'].apply(map_Dependents)
+    df['Education'] = df['Education'].apply(map_Education)
+    df['Self_Employed'] = df['Self_Employed'].apply(map_Self_Employed)
+    df['Credit_History'] = df['Credit_History'].apply(map_Credit_History)
+    df['Property_Area'] = df['Property_Area'].apply(map_Property_Area)
     df['ApplicantIncome'] = df['ApplicantIncome'].apply(map_income_range)
     df['CoapplicantIncome'] = df['CoapplicantIncome'].apply(map_income_range)
     df['LoanAmount'] = df['LoanAmount'].apply(map_amount_range)
     df['Loan_Amount_Term'] = df['Loan_Amount_Term'].apply(map_amount_term_range)
-    df['Dependents'] = df['Dependents'].apply(num2str)
-    df['Credit_History'] = df['Credit_History'].apply(num2str)
+    df['Loan_Status'] = df['Loan_Status'].apply(map_Loan_Status)
     return df
 
 

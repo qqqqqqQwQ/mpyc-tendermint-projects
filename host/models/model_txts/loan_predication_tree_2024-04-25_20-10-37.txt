@@ -1,22 +1,5 @@
 
-if Credit_History == : 
-|   if Self_Employed == : N
-|   if Self_Employed == No: 
-|   |   if ApplicantIncome == A: N
-|   |   if ApplicantIncome == B: N
-|   |   if ApplicantIncome == C: Y
-|   |   if ApplicantIncome == D: Y
-|   |   if ApplicantIncome == E: Y
-|   |   if ApplicantIncome == F: Y
-|   |   if ApplicantIncome == G: Y
-|   |   if ApplicantIncome == H: Y
-|   |   if ApplicantIncome == I: N
-|   |   if ApplicantIncome == J: N
-|   |   if ApplicantIncome == K: N
-|   |   if ApplicantIncome == L: N
-|   |   if ApplicantIncome == M: Y
-|   if Self_Employed == Yes: Y
-if Credit_History == 0.0: 
+if Credit_History == 0: 
 |   if LoanAmount == : N
 |   if LoanAmount == A: N
 |   if LoanAmount == B: 
@@ -37,7 +20,7 @@ if Credit_History == 0.0:
 |   if LoanAmount == F: N
 |   if LoanAmount == G: Y
 |   if LoanAmount == H: N
-if Credit_History == 1.0: 
+if Credit_History == 1: 
 |   if LoanAmount == : Y
 |   if LoanAmount == A: 
 |   |   if CoapplicantIncome == A: 
@@ -60,7 +43,6 @@ if Credit_History == 1.0:
 |   |   if ApplicantIncome == A: Y
 |   |   if ApplicantIncome == B: Y
 |   |   if ApplicantIncome == C: 
-|   |   |   if Dependents == : Y
 |   |   |   if Dependents == 0: 
 |   |   |   |   if Gender == : N
 |   |   |   |   if Gender == Female: Y
@@ -68,6 +50,7 @@ if Credit_History == 1.0:
 |   |   |   if Dependents == 1: Y
 |   |   |   if Dependents == 2: Y
 |   |   |   if Dependents == 3+: N
+|   |   |   if Dependents == nan: Y
 |   |   if ApplicantIncome == D: 
 |   |   |   if Married == : Y
 |   |   |   if Married == No: Y
@@ -113,3 +96,20 @@ if Credit_History == 1.0:
 |   if LoanAmount == E: Y
 |   if LoanAmount == F: N
 |   if LoanAmount == G: Y
+|   if LoanAmount == H: Y
+if Credit_History == nan: 
+|   if Self_Employed == : N
+|   if Self_Employed == No: 
+|   |   if ApplicantIncome == A: N
+|   |   if ApplicantIncome == B: N
+|   |   if ApplicantIncome == C: Y
+|   |   if ApplicantIncome == D: Y
+|   |   if ApplicantIncome == E: Y
+|   |   if ApplicantIncome == F: Y
+|   |   if ApplicantIncome == G: Y
+|   |   if ApplicantIncome == H: Y
+|   |   if ApplicantIncome == I: N
+|   |   if ApplicantIncome == J: N
+|   |   if ApplicantIncome == K: N
+|   |   if ApplicantIncome == L: N
+|   |   if ApplicantIncome == M: Y
