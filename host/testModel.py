@@ -1,10 +1,10 @@
 
-from host.utils import text2treeArray,dataClean
-from host.utils import dataAnalyseBytxt
+from utils import text2treeArray,dataClean
+from utils.dataAnalyseBytxt import validate_dataset
 import pandas as pd
 
-model_path = "../models/model_txts/loan_predication_tree_2024-04-25_20-10-37.txt"
-data_path="../mpcData/loan_predication_check.csv"
+model_path = "models/model_txts/loan_predication_tree_2024-04-25_20-10-37.txt"
+data_path= "mpcData/loan_predication_check.csv"
 
 
 
@@ -17,7 +17,7 @@ dataset = dataClean.process_excel_file(data)
 # 使用 validate_dataset 函数对数据集进行验证
 loan_status_result = dataset['Loan_Status'].values
 print(loan_status_result)
-predictions = dataAnalyseBytxt.validate_dataset(dataset, decision_tree)
+predictions = validate_dataset(dataset, decision_tree)
 print(predictions)
 
 # 初始化准确度计数器

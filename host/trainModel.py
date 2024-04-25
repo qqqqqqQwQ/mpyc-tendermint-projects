@@ -1,18 +1,18 @@
-from host.utils import file2pd,dataClean,text2model,modeltxtRecord
+from utils import file2pd,dataClean,text2model,modeltxtRecord
 import os
 import platform
 import subprocess
 import pandas as pd
 
 current_directory = os.path.dirname(__file__)
-csv_path = os.path.join(current_directory,"..","mpcData","loan_predication_test.csv")
+csv_path = os.path.join(current_directory,"mpcData","loan_predication_test.csv")
 data = pd.read_csv(csv_path)
-file_path = os.path.join(current_directory,'..', 'id3gini', 'data', 'id3', 'loan_predication.csv')
+file_path = os.path.join(current_directory, 'id3gini', 'data', 'id3', 'loan_predication.csv')
 dataClean.process_excel_file(data).to_csv(file_path, index=False)
 
 # 训练模型
 # 以下是多方计算
-folder_path=os.path.join(current_directory,"..",'id3gini')
+folder_path=os.path.join(current_directory,'id3gini')
 python_command = f"python id3gini.py -i 7"
 command = f"cd /d {folder_path} && {python_command}"
 current_os = platform.system()

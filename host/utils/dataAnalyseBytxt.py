@@ -1,28 +1,4 @@
 import pandas as pd
-from host.utils import dataClean,text2treeArray
-
-def parse_decision_tree(tree_text):
-    tree_dict = {}
-    current_condition = None
-    for line in tree_text.split('\n'):
-        line = line.strip()
-        if not line:
-            continue
-        if 'if' in line:
-            parts = line.split('==')
-            feature = parts[0].split('if')[1].strip()
-            value = parts[1].split(':')[0].strip()
-            result = parts[1].split(':')[1].strip()
-            current_condition = (feature, value)
-            tree_dict[current_condition] = result
-        else:
-            parts = line.split(':')
-            value = parts[0].strip()
-            result = parts[1].strip()
-            tree_dict[current_condition][value] = result
-    print(tree_dict)
-    return tree_dict
-# def parse_decision_tree(tree_text):
 
 def predict_sample(sample, decision_tree):
     try:
@@ -60,9 +36,6 @@ def predict_sample(sample, decision_tree):
     except Exception as e:
         print(e)
 
-
-
-
 def validate_dataset(dataset, decision_tree):
     predictions = []
     print(dataset)
@@ -74,6 +47,8 @@ def validate_dataset(dataset, decision_tree):
     return predictions
 
 if __name__ == "__main__":
+    import dataClean
+    import text2treeArray
     # 读取树
     file_path="../models/model_txts/loan_predication_tree_2024-04-25_20-10-37.txt"
     with open(file_path, 'r') as file:
