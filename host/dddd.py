@@ -127,7 +127,7 @@ async def test():
         # features = ['Credit_History', 'Self_Employed', 'ApplicantIncome', 'LoanAmount', 'CoapplicantIncome','Property_Area', 'Education', 'Dependents', 'Gender', 'Married']
         features=['Gender','Married','Dependents','Education','Self_Employed','ApplicantIncome','CoapplicantIncome','LoanAmount','Loan_Amount_Term','Credit_History','Property_Area']
         # 尝试将结果变成决策树模型
-        text2model.saveModel(output,features)
+        # text2model.saveModel(output,features)
         modeltxtRecord.save_txt_file(output)
         return jsonify({'code': 200, 'data': output})
     except Exception as e:
