@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from secrets import token_hex
 from unanimous.utils import get_task_status
 from unanimous import route as Unanimous
-from mpcData import ComputeData
+# from mpcData import ComputeData
 from utils import dataClean,file2pd,text2model,modeltxtRecord
 import platform
 import os
@@ -48,7 +48,8 @@ async def login_post():
     data = await request.get_json()
     client_key = data.get('client_key')
     redirect_url = data.get('redirect_url')
-    client_is_exist, client_name = ComputeData.checkClientKey(data)
+    # client_is_exist, client_name = ComputeData.checkClientKey(data)
+    client_is_exist, client_name = 1,1
     print("client_is_exist:",client_is_exist)
     if client_is_exist==1:
         # 处理用户登录逻辑，验证用户名密码等

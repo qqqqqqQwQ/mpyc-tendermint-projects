@@ -120,6 +120,8 @@ def num2str(num):
     except Exception:
         1
     finally:
+        if pd.isna(num):
+            return ''
         return str(num)
 
 def process_excel_file(df: pd.DataFrame) -> pd.DataFrame:
@@ -133,6 +135,11 @@ def process_excel_file(df: pd.DataFrame) -> pd.DataFrame:
     df['Loan_Amount_Term'] = df['Loan_Amount_Term'].apply(map_amount_term_range)
     df['Dependents'] = df['Dependents'].apply(num2str)
     df['Credit_History'] = df['Credit_History'].apply(num2str)
+    df['Gender'] = df['Gender'].apply(num2str)
+    df['Married'] = df['Married'].apply(num2str)
+    df['Education'] = df['Education'].apply(num2str)
+    df['Self_Employed'] = df['Self_Employed'].apply(num2str)
+    df['Property_Area'] = df['Property_Area'].apply(num2str)
     return df
 
 

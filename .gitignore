@@ -2,7 +2,6 @@
 *.iml
 *.pyc
 .idea/
-.idea/workspace.xml
 host1/
 host2/
 host3/

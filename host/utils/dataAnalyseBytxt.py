@@ -33,6 +33,8 @@ def predict_sample(sample, decision_tree):
                     return result
             else:
                 continue
+        # 决策树也无法决定：
+        return 'N'
     except Exception as e:
         print(e)
 
