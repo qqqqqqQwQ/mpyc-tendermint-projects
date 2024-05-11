@@ -3,8 +3,9 @@ from utils import text2treeArray,dataClean
 from utils.dataAnalyseBytxt import validate_dataset
 import pandas as pd
 
-model_path = "models/model_txts/loan_predication_tree_2024-04-26_15-18-34.txt"
+model_path = "models/model_txts/loan_predication_tree_2024-05-08_21-55-29.txt"
 data_path= "mpcData/loan_predication_check.csv"
+# data_path= "mpcData/loan_predication_test.csv"
 
 
 

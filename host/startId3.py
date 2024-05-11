@@ -13,7 +13,7 @@ dataClean.process_excel_file(data).to_csv(file_path, index=False)
 # 训练模型
 # 以下是多方计算
 folder_path=os.path.join(current_directory,'id3gini')
-python_command = f"python id3gini.py -i 7"
+python_command = f"python id3gini.py -i 7 -C party3_0.ini"
 command = f"cd /d {folder_path} && {python_command}"
 current_os = platform.system()
 ret = subprocess.run(command,stdout=subprocess.PIPE, shell=True, encoding='utf-8')

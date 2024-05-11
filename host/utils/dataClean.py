@@ -144,6 +144,11 @@ def process_excel_file(df: pd.DataFrame) -> pd.DataFrame:
 
 
 if __name__ == '__main__':
-    file_path = 'path/to/your/uploaded/file.xlsx'
-    processed_data = process_excel_file(file_path)
-    print(processed_data)
+    print("以下是dataClean函数的测试")
+    file_path = '../id3gini/data/id3/loan_predication_tmp.csv'
+    file=pd.read_csv(file_path)
+    pd.set_option('display.max_rows', None)
+    pd.set_option('display.max_columns', None)
+    print("数据处理前:",file)
+    processed_data = process_excel_file(file)
+    print("数据处理后",processed_data)

@@ -1,0 +1,51 @@
+
+if Credit_History == : 
+|   if LoanAmount == : N
+|   if LoanAmount == A: Y
+|   if LoanAmount == B: Y
+|   if LoanAmount == C: N
+|   if LoanAmount == D: N
+if Credit_History == 0: N
+if Credit_History == 1: 
+|   if Property_Area == Rural: 
+|   |   if Loan_Amount_Term == : N
+|   |   if Loan_Amount_Term == A: N
+|   |   if Loan_Amount_Term == B: Y
+|   |   if Loan_Amount_Term == C: N
+|   if Property_Area == Semiurban: 
+|   |   if LoanAmount == : Y
+|   |   if LoanAmount == A: Y
+|   |   if LoanAmount == B: 
+|   |   |   if Gender == : N
+|   |   |   if Gender == Female: 
+|   |   |   |   if ApplicantIncome == B: Y
+|   |   |   |   if ApplicantIncome == C: Y
+|   |   |   |   if ApplicantIncome == D: Y
+|   |   |   |   if ApplicantIncome == E: N
+|   |   |   |   if ApplicantIncome == F: N
+|   |   |   |   if ApplicantIncome == G: N
+|   |   |   |   if ApplicantIncome == H: N
+|   |   |   |   if ApplicantIncome == I: N
+|   |   |   |   if ApplicantIncome == J: N
+|   |   |   |   if ApplicantIncome == K: N
+|   |   |   if Gender == Male: Y
+|   |   if LoanAmount == C: N
+|   |   if LoanAmount == D: N
+|   if Property_Area == Urban: 
+|   |   if ApplicantIncome == B: N
+|   |   if ApplicantIncome == C: Y
+|   |   if ApplicantIncome == D: 
+|   |   |   if Married == : Y
+|   |   |   if Married == No: N
+|   |   |   if Married == Yes: Y
+|   |   if ApplicantIncome == E: 
+|   |   |   if Dependents == : N
+|   |   |   if Dependents == 0: Y
+|   |   |   if Dependents == 1: N
+|   |   |   if Dependents == 2: Y
+|   |   |   if Dependents == 3+: N
+|   |   if ApplicantIncome == F: Y
+|   |   if ApplicantIncome == G: Y
+|   |   if ApplicantIncome == H: Y
+|   |   if ApplicantIncome == I: Y
+|   |   if ApplicantIncome == J: N
