@@ -11,10 +11,10 @@ def save_txt_file(content):
     # 获取当前文件目录
     # current_directory = os.path.dirname(__file__)
     # 获取当前工作目录
-    current_directory = os.getcwd()
+    current_directory = os.path.dirname(__file__)
 
     # 确定保存的目录
-    save_directory = os.path.join(current_directory, 'models', 'model_txts')
+    save_directory = os.path.join(current_directory, "..",'models', 'model_txts')
 
     # 如果目录不存在，则创建它
     if not os.path.exists(save_directory):

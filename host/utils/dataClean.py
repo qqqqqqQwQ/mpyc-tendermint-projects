@@ -16,11 +16,11 @@ Loan_Status（贷款状态）： 表示贷款是否批准的标志，可能是�
 
 数据处理：
 1.多出来的其他的标签全部清除，缺失的标签先不管，看看多方计算时会怎么样先
-
+2.所有数字值必须变成字符串，不然比较时候数字和字符会乱
 """
 def map_income_range(income):
-    if pd.isna(income):  # 如果值为空，则不处理
-        return income
+    if not isinstance(income, (int, float)) or income == '' or pd.isna(income):
+        return ""
     if income < 1000:
         return 'A'
     elif income < 2000:
@@ -50,12 +50,12 @@ def map_income_range(income):
         try:
             income_numeric = pd.to_numeric(income)
         except:
-            return pd.NA
+            return ""
         return 'M'
 
 def map_amount_range(amount):
-    if pd.isna(amount):  # 如果值为空，则不处理
-        return amount
+    if not isinstance(amount, (int, float)) or amount == '' or pd.isna(amount):
+        return ""
     if amount < 100:
         return 'A'
     elif amount < 200:
@@ -81,16 +81,11 @@ def map_amount_range(amount):
     elif amount < 2000:
         return 'L'
     else:
-        # 尝试将值转换为数字，如果失败则返回空
-        try:
-            income_numeric = pd.to_numeric(amount)
-        except:
-            return pd.NA
         return 'M'
 
 def map_amount_term_range(term):
-    if pd.isna(term):  # 如果值为空，则不处理
-        return term
+    if not isinstance(term, (int, float)) or term == '' or pd.isna(term):
+        return ""
     if term < 180:
         return 'A'
     elif term < 360:
@@ -116,11 +111,20 @@ def map_amount_term_range(term):
         try:
             income_numeric = pd.to_numeric(term)
         except:
-            return pd.NA
+            return ""
         return 'M'
 
+def num2str(num):
+    try:
+        num=int(num)
+    except Exception:
+        1
+    finally:
+        if pd.isna(num):
+            return ''
+        return str(num)
 
-def process_excel_file(df: object) -> object:
+def process_excel_file(df: pd.DataFrame) -> pd.DataFrame:
     # 清除不需要的列
     # df = df.drop(columns=['不需要的列1', '不需要的列2'])
 
@@ -129,10 +133,22 @@ def process_excel_file(df: object) -> object:
     df['CoapplicantIncome'] = df['CoapplicantIncome'].apply(map_income_range)
     df['LoanAmount'] = df['LoanAmount'].apply(map_amount_range)
     df['Loan_Amount_Term'] = df['Loan_Amount_Term'].apply(map_amount_term_range)
+    df['Dependents'] = df['Dependents'].apply(num2str)
+    df['Credit_History'] = df['Credit_History'].apply(num2str)
+    df['Gender'] = df['Gender'].apply(num2str)
+    df['Married'] = df['Married'].apply(num2str)
+    df['Education'] = df['Education'].apply(num2str)
+    df['Self_Employed'] = df['Self_Employed'].apply(num2str)
+    df['Property_Area'] = df['Property_Area'].apply(num2str)
     return df
 
 
 if __name__ == '__main__':
-    file_path = 'path/to/your/uploaded/file.xlsx'
-    processed_data = process_excel_file(file_path)
-    print(processed_data)
+    print("以下是dataClean函数的测试")
+    file_path = '../id3gini/data/id3/loan_predication_tmp.csv'
+    file=pd.read_csv(file_path)
+    pd.set_option('display.max_rows', None)
+    pd.set_option('display.max_columns', None)
+    print("数据处理前:",file)
+    processed_data = process_excel_file(file)
+    print("数据处理后",processed_data)

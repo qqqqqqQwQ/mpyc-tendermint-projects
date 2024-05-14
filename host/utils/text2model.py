@@ -1,70 +1,49 @@
-from sklearn.tree import DecisionTreeClassifier
 import pickle
 import os
 from datetime import datetime
 
-# 保存模型到文件
+# 定义节点类
+class TreeNode:
+    def __init__(self, feature=None, children=None, result=None):
+        self.feature = feature  # 分裂特征
+        self.children = children  # 子节点
+        self.result = result  # 叶节点的类别值或结果值
 
-# 定义一个函数来解析文本决策树并转换为字典格式
-def parse_tree(tree_text):
-    lines = tree_text.split('\n')
-    tree_dict = {}
-    for line in lines:
-        line = line.strip()
-        if not line:
-            continue
-        if 'if' in line:
-            condition, result = line.split(':')
-            feature, value = condition.split('==')
-            feature = feature.strip()
-            value = value.strip()
-            result = result.strip()
-            tree_dict[(feature, value)] = result
-    return tree_dict
+# 递归构建决策树
+def build_tree(data):
+    if not data:
+        return None
 
-# 文本形式的决策树
-# tree_text = """
-# if Credit_History == :
-# |   if Self_Employed == : N
-# |   if Self_Employed == No:
-# |   |   if ApplicantIncome == A: N
-# |   |   if ApplicantIncome == B: N
-# |   |   if ApplicantIncome == C: Y
-# |   |   if ApplicantIncome == D: Y
-# ...
-# """
+    # 获取当前特征
+    feature, _, _ = data[0]
 
+    # 创建节点
+    node = TreeNode(feature=feature)
 
-# 定义一个函数来根据解析的决策树字典生成特征和目标数据
-def create_dataset(tree_dict, features):
-    X = []
-    y = []
-    for feature_values, result in tree_dict.items():
-        feature_vector = [1 if feature_values[0] == feature else 0 for feature in features]
-        X.append(feature_vector)
-        y.append(1 if result == 'Y' else 0)
-    return X, y
+    # 分割数据
+    children = {}
+    while data and data[0][0] == feature:
+        _, value, result = data.pop(0)
+        if result != "":  # 如果结果不是空字符串，则当前节点是叶子节点
+            children[value] = TreeNode(result=result)
+        else:  # 如果结果是空字符串，则当前节点是内部节点
+            children[value] = build_tree(data)
+    node.children = children
+    return node
 
-
-# 保存模型到文件
-def saveModel(tree_text,features):
-    tree_dict = parse_tree(tree_text)
-    # features = ['Credit_History', 'Self_Employed', 'ApplicantIncome', 'LoanAmount', 'CoapplicantIncome','Property_Area', 'Education', 'Dependents', 'Gender', 'Married']
-    X, y = create_dataset(tree_dict, features)
-    # 使用sklearn训练决策树模型
-    model = DecisionTreeClassifier(max_depth=5)
-    model.fit(X, y)
-    current_directory = os.getcwd()
-    save_directory = os.path.join(current_directory, 'models','model_pkls')
+def saveModel(sample_data):
+    root_node = build_tree(sample_data)
+    # 保存决策树为 .pkl 文件
+    current_directory = os.path.dirname(__file__)
+    save_directory = os.path.join(current_directory, "..", 'models', 'model_pkls')
     # 如果目录不存在，则创建它
     if not os.path.exists(save_directory):
         os.makedirs(save_directory)
     # 定义模型保存路径
     current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-
     # 构造文件名
     file_name = f'decision_tree_model_{current_time}.pkl'
     model_path = os.path.join(save_directory, file_name)
     # 保存模型到文件
     with open(model_path, 'wb') as f:
-        pickle.dump(model, f)
+        pickle.dump(root_node, f)

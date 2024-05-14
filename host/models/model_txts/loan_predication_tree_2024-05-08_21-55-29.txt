@@ -16,7 +16,7 @@ if Credit_History == :
 |   |   if ApplicantIncome == L: N
 |   |   if ApplicantIncome == M: Y
 |   if Self_Employed == Yes: Y
-if Credit_History == 0.0: 
+if Credit_History == 0: 
 |   if LoanAmount == : N
 |   if LoanAmount == A: N
 |   if LoanAmount == B: 
@@ -37,7 +37,7 @@ if Credit_History == 0.0:
 |   if LoanAmount == F: N
 |   if LoanAmount == G: Y
 |   if LoanAmount == H: N
-if Credit_History == 1.0: 
+if Credit_History == 1: 
 |   if LoanAmount == : Y
 |   if LoanAmount == A: 
 |   |   if CoapplicantIncome == A: 
