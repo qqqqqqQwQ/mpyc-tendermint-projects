@@ -11,10 +11,10 @@
             <CommonHead />
 
           </el-header>
-          <!-- <el-header class="header" height="90px">
+          <el-header class="header" height="90px">
             <LoginHead />
 
-          </el-header> -->
+          </el-header>
           <el-main class="main">Main</el-main>
           <el-footer class="Footer">Footer</el-footer>
         </el-container>
