@@ -2,7 +2,7 @@
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false"
         @select="handleSelect">
         <el-menu-item index="0">
-            <img style="width: 200px" src="@/images/element-plus-logo.svg" alt="Element logo" />
+            <img style="width: 90px; height: 90px" src="@/images/SMPC.jpg" alt="Element logo" />
         </el-menu-item>
         <div class="flex-grow" />
 

@@ -16,24 +16,10 @@
 
           </el-header> -->
           <el-main class="main">
-            <el-row class="rows">
-              <el-col class="cols_left">我们的价值主张</el-col>
-              <el-col class="cols_right">我们的独特技术</el-col>
-            </el-row>
-            <el-row class="rows">
-              <el-col class="cols_left">数据隐私保护的高度可信性</el-col>
-              <el-col class="cols_right">使用Tendermint搭建区块链</el-col>
-            </el-row>
-            <el-row class="rows">
-              <el-col class="cols_left">去中心化的安全保障机制</el-col>
-              <el-col class="cols_right">使用MPyC框架设计多方安全协议</el-col>
-            </el-row>
-            <el-row class="rows">
-              <el-col class="cols_left">数据共享和模型融合的高效性</el-col>
-              <el-col class="cols_right">使用PySyft框架用于搭建联邦学习</el-col>
-            </el-row>
+            <img class="background-image"/>
+            <img class="info_image" src="../images/main_info.jpg" alt="Element logo" />
           </el-main>
-          <el-footer class="Footer">Footer</el-footer>
+          <el-footer class="Footer"></el-footer>
         </el-container>
       </el-container>
     </el-container>
@@ -51,21 +37,16 @@ import LoginHead from "@/components/LoginHeader.vue";
 </script>
 
 <style>
-.rows{
-  width:100%;
-  text-align: center;
-  display: block;
+.background-image {
+  background-image: url('../images/main_bg.jpg'); /* 设置图片路径 */
+  background-size: cover; /* 背景图片覆盖整个元素 */
+  background-repeat: no-repeat; /* 背景图片不重复 */
+  background-position: center; /* 背景图片居中 */
+  width: 100%; /* 元素宽度 */
+  height: 84px; /* 元素高度 */
 }
-.cols_left{
-  width:50%;
-  text-align: center;
-  float:left;
-  display: block;
-}
-.cols_right{
-  width:50%;
-  text-align: center;
-  float:right;
-  display: block;
+.info_image{
+  width: 100%; 
+  height: 75%;
 }
 </style>

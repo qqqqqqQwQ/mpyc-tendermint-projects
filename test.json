@@ -1,0 +1,9 @@
+ {
+  "ctrlType": "UpdateSettings",
+  "param": "Brightness:Medium;Contrast:High",
+  "time": "20240514193510",
+  "requestId": "REQ123456789",
+  "errorCode": 0,
+  "errorMessage": "",
+  "extra": "Urgency:Low"
+}
