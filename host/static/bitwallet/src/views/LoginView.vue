@@ -1,25 +1,27 @@
 <template>
   <div id="login_container">
     <h3 class="login_title">
-      <div id="login_head" :style="{ fontSize: '27px' }">欢迎使用多方安全计算服务</div>
-      <el-button type="default" :style="{ fontSize: '13px' }" id="register_button" @click="toRegister()">
+      <div id="login_head" >欢迎使用多方安全计算服务</div>
+      <el-button type="default" id="register_button" @click="toRegister()">
         没有账户？点击注册
       </el-button>
     </h3>
     <el-form ref="formRef" style="max-width: 600px" :model="keyValidateForm" label-width="auto" class="demo-ruleForm"
       :rules="rules">
-      <el-form-item label="public-key" prop="publickey" id="publickeyForm" style="width: 90%">
-        <el-input v-model="keyValidateForm.publickey" type="password" show-password autocomplete="off"
-          placeholder="公钥" />
+      <el-form-item label="用户名" prop="username" id="usernameForm" style="width: 90%">
+        <el-input v-model="keyValidateForm.username"  autocomplete="off"
+          placeholder="请输入用户名" />
       </el-form-item>
-      <el-form-item label="private-key" prop="privatekey" id="privatekeyForm" style="width: 90%">
-        <el-input v-model="keyValidateForm.privatekey" type="password" show-password autocomplete="off"
-          placeholder="私钥" />
+      <el-form-item label="密码" prop="password" id="passwordForm" style="width: 90%">
+        <el-input v-model="keyValidateForm.password" type="password" show-password autocomplete="off"
+          placeholder="请输入密码" />
       </el-form-item>
+      <div id="service_rules" style="color: #333">登录表示您已同意<a href="https://baidu.com" style="color: #330362" target="_blank">《服务条款》</a></div>
       <el-form-item id="login_button_container">
         <el-button type="primary" id="login_button" plain @click="Login(formRef)">登录</el-button>
         <el-button @click="resetForm(formRef)" plain type="info" id="reset_button">重置</el-button>
       </el-form-item>
+
     </el-form>
   </div>
 </template>
@@ -34,8 +36,8 @@ import axios from 'axios';
 
 //定义表单数据接口
 interface LoginForm {
-  publickey: string,
-  privatekey: string,
+  username: string,
+  password: string,
 }
 //使用useRouter获取路由实例
 const router = useRouter();
@@ -43,17 +45,17 @@ const router = useRouter();
 const formRef = ref<FormInstance>()
 // 创建一个响应式对象来存储需要验证的表单数据
 const keyValidateForm = reactive<LoginForm>({
-  publickey: '',
-  privatekey: '',
+  username: '',
+  password: '',
 })
 // 创建用于校验的规则对象
 const rules = reactive({
-  publickey: [
-    { required: true, message: '请输入你的公钥', trigger: 'blur' },
-    { min: 5, max: 20, message: '长度应该在5到20之间', trigger: 'blur' },
+  username: [
+    { required: true, message: '请输入你的用户名', trigger: 'blur' },
+    { min: 5, max: 20, message: '账户不能为空', trigger: 'blur' },
   ],
-  privatekey: [
-    { required: true, message: '请输入你的私钥', trigger: 'blur' },
+  password: [
+    { required: true, message: '请输入你的密码', trigger: 'blur' },
     { min: 5, max: 20, message: '长度应该在5到20之间', trigger: 'blur' },
   ]
 });
@@ -79,7 +81,7 @@ const Login = async (formEl: FormInstance | undefined) => {
       router.push({ path: '/' });
     }
     else {
-      
+
       console.log('error login!', fields);
       ElMessage({
         message: '登陆失败！',
@@ -103,19 +105,19 @@ const toRegister = () => {
 
 <style scoped>
 #login_button {
-  width: 24%;
+  width: 23%;
   font-size: 14px;
   margin-left: auto;
 }
 
 #reset_button {
-  width: 24%;
+  width: 23%;
   font-size: 14px;
   margin-right: auto;
 }
 
 #login_head {
-  font-size: 22px;
+  font-size: 27px;
   color: #333;
   margin-bottom: 5px;
 
@@ -128,23 +130,18 @@ const toRegister = () => {
 
 #login_container {
   border-radius: 15px;
-  margin: 10% auto;
-  width: 500px;
+  margin: 4% auto;
+  width: 475px;
   height: 275px;
   background: #fff;
   border: 1px solid #eaeaea;
   box-shadow: 0 0 20px #8a8d8ec9;
-  padding: 20px 20px 20px 28px;
+  padding: 20px 10px 40px 28px;
   justify-content: center;
   align-items: center;
   position: relative;
 }
 
-#login_button_container {
-  margin-bottom: 10px;
-  margin-top: 25px;
-
-}
 
 .login_title {
   text-align: center;
@@ -159,5 +156,13 @@ const toRegister = () => {
   text-align: center;
   text-decoration: none;
   margin-top: 8px;
+  font-size: 13px;
+}
+
+#service_rules {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13px;
+  margin-bottom: 20px;
 }
 </style>
