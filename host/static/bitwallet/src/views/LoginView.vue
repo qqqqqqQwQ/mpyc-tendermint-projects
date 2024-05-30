@@ -6,15 +6,18 @@
         没有账户？点击注册
       </el-button>
     </h3>
-    <el-form ref="formRef" style="max-width: 600px" :model="keyValidateForm" label-width="auto" class="demo-ruleForm" :rules="rules">
+    <el-form ref="formRef" style="max-width: 600px" :model="keyValidateForm" label-width="auto" class="demo-ruleForm"
+      :rules="rules">
       <el-form-item label="用户名" prop="username" id="usernameForm" style="width: 90%">
-        <el-input v-model="keyValidateForm.username"  autocomplete="off" placeholder="请输入用户名" />
+        <el-input v-model="keyValidateForm.username"  autocomplete="off"
+          placeholder="请输入用户名" />
       </el-form-item>
       <el-form-item label="密码" prop="password" id="passwordForm" style="width: 90%">
-        <el-input v-model="keyValidateForm.password" type="password" show-password autocomplete="off" placeholder="请输入密码" />
+        <el-input v-model="keyValidateForm.password" type="password" show-password autocomplete="off"
+          placeholder="请输入密码" />
       </el-form-item>
       <div id="service_rules" style="color: #333">登录表示您已同意<a href="https://baidu.com" style="color: #330362" target="_blank">《服务条款》</a></div>
-      <el-form-item>
+      <el-form-item id="login_button_container">
         <el-button type="primary" id="login_button" plain @click="Login(formRef)">登录</el-button>
         <el-button @click="resetForm(formRef)" plain type="info" id="reset_button">重置</el-button>
       </el-form-item>
@@ -49,7 +52,7 @@ const keyValidateForm = reactive<LoginForm>({
 const rules = reactive({
   username: [
     { required: true, message: '请输入你的用户名', trigger: 'blur' },
-    { min: 1, max: 20, message: '账户不能为空', trigger: 'blur' },
+    { min: 5, max: 20, message: '账户不能为空', trigger: 'blur' },
   ],
   password: [
     { required: true, message: '请输入你的密码', trigger: 'blur' },
@@ -105,7 +108,6 @@ const toRegister = () => {
   width: 23%;
   font-size: 14px;
   margin-left: auto;
-
 }
 
 #reset_button {

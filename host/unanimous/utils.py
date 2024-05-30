@@ -21,6 +21,7 @@ async def create_task(data,task_name):
     except Exception as e:
         print(f"create_task error:{e}")  # 打印错误信息
         raise Exception(e)
+
 async def get_spare_nodes(party_num):
     try:
         while 1:
