@@ -22,7 +22,7 @@ user_target_pages = {}
 host_path = "localhost"
 
 
-# Mysql内容 假设已经初始化完成
+# Mysql内容 假设已经初始化完成 目前仅完成存储数据的内容
 def create_connection():
     return mysql.connector.connect(
         host='localhost',
