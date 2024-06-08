@@ -90,8 +90,8 @@ import {
 } from '@element-plus/icons-vue'
 //头像实例
 //const imgSrc = require("@/images/user_headphoto.jpg")
-const getImgSrc = (user) => {
-    return new URL(`@/images/${user}.jpg`, import.meta.url).href;//注意是反引号不是单引号
+const getImgSrc = (user:string) => {
+    return new URL(`../images/${user}.jpg`, import.meta.url).href;//注意是反引号不是单引号
 }
 
 //使用useRouter获取路由实例
