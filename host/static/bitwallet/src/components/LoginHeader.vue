@@ -16,7 +16,7 @@
             <template #title>{{ item.label }}</template>
         </el-menu-item>
 
-
+<!--
         <el-menu-item @click="clickMenu(item)" v-for=" item in eInfo" :key="item.name" :index="item.name">
             <el-icon>
                 <Avatar />
@@ -52,11 +52,17 @@
             </el-icon>
             <template #title>{{ item.label }}</template>
         </el-menu-item>
+  -->
+    <el-button type="primary" size="large" plain @click="clickLogout()">登出</el-button>   
+    <span class="el-dropdown-link">
+        <img class="user-headphoto" :src="getImgSrc('user_headphoto')" alt="头像" />
+    </span>
 
+    <!--
         <div class="">
             <el-dropdown :hide-on-click="false">
                 <span class="el-dropdown-link">
-                    <img class="user-headphoto" :src="getImgSrc('user_headphoto')" alt="头像" />
+                    <img class="user-headphoto" :src="getImgSrc('')" alt="头像" />
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
@@ -70,7 +76,7 @@
                 </template>
             </el-dropdown>
         </div>
-
+    -->
     </el-menu>
 </template>
 
@@ -88,6 +94,8 @@ import {
     Avatar,
     Promotion,
 } from '@element-plus/icons-vue'
+import { useStore } from 'vuex';
+const store = useStore();
 //头像实例
 //const imgSrc = require("@/images/user_headphoto.jpg")
 const getImgSrc = (user:string) => {
@@ -103,15 +111,19 @@ const handleOpen = (key: string, keyPath: string[]) => {
 const handleClose = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 }
+const clickLogout = () => {
+    router.push("/");
+    store.commit('resetUser');
+}
 const clickMenu = (item: any) => {
     console.log(item)
     router.push(item.path)
 }
 const menuData = ref([
     {
-        path: "/",
-        name: "home",
-        component: () => import("@/views/HomeView.vue"),
+        path: "/loginhome",
+        name: "loginhome",
+        component: () => import("@/views/LoginHome.vue"),
         label: "首页",
     },
     {

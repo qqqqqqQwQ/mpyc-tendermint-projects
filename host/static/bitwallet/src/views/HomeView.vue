@@ -18,13 +18,13 @@
           <el-main class="main">
             <img class="background-image"/>
             <img class="info_image" src="../images/main_info.jpg" alt="Element logo" />
-            <div class="buttons">
+            <!-- <div class="buttons">
               <el-button type="primary" size="large" round>数据学习</el-button>
               <el-button type="info" size="large" round>联邦管理</el-button>
               <router-link to="/modelfunction">
                 <el-button type="warning" size="large" round>模型租用</el-button>
               </router-link>
-            </div>
+            </div> -->
           </el-main>
           <el-footer class="Footer"></el-footer>
         </el-container>

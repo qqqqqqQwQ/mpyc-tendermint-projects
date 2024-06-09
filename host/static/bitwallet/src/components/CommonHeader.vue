@@ -11,10 +11,10 @@
         <td class="line">
             <div class="dashed" />
         </td>
-        <el-menu-item @click="clickMenu(item)" v-for="item in noChildren" :key="item.name" :index="item.name">
+        <!-- <el-menu-item @click="clickMenu(item)" v-for="item in noChildren" :key="item.name" :index="item.name">
             <el-icon><home-filled /></el-icon>
             <template #title>{{ item.label }}</template>
-        </el-menu-item>
+        </el-menu-item> -->
 <!--
         <el-menu-item @click="clickMenu(item)" v-for=" item in eInfo" :key="item.name" :index="item.name">
             <el-icon>

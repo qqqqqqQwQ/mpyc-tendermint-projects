@@ -5,7 +5,7 @@ export default createStore({
     dataContainer: ['数据1', '数据2', '数据3'], //存放数据的地方,可修改
     modelContainer: ['模型1', '模型2', '模型3'], //存放模型的地方,可修改
     userData: {
-      username: 'admin',//用户名,登录注册的时候最好存进去,可修改
+      username: '',//默认用户名
       deposit: 0,//押金金额,默认为0,可修改
       fund: 0,//资金金额,默认为0,可修改
     },
@@ -22,6 +22,15 @@ export default createStore({
   },
   getters: {},
   mutations: {
+    resetUser(state) {
+      state.userData.username = '';
+      state.userData.deposit = 0;
+      state.userData.fund = 0;
+      //登出时重置用户的参数,默认下一个登录的用户初始押金和资金为0,可修改
+    },
+    updateUsername(state, amount: string) {
+      state.userData.username = amount;
+    },
     updateDeposit(state, amount: number) {
       state.userData.deposit += amount;
     },

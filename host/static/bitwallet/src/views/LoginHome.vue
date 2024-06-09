@@ -18,6 +18,13 @@
           <el-main class="main">
             <img class="background-image"/>
             <img class="info_image" src="../images/main_info.jpg" alt="Element logo" />
+            <div class="buttons">
+              <el-button type="primary" size="large" round>数据学习</el-button>
+              <el-button type="info" size="large" round>联邦管理</el-button>
+              <router-link to="/modelfunction">
+                <el-button type="warning" size="large" round>模型租用</el-button>
+              </router-link>
+            </div>
           </el-main>
           <el-footer class="Footer"></el-footer>
         </el-container>
@@ -46,7 +53,12 @@ import LoginHead from "@/components/LoginHeader.vue";
   height: 84px; /* 元素高度 */
 }
 .info_image{
-  width: 100%;
+  width: 100%; 
   height: 75%;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 100px; 
 }
 </style>

@@ -34,7 +34,8 @@ import { useRouter } from 'vue-router';
 import { ElMessage, LAST_KEYS } from 'element-plus';
 import { userData } from '@/data'
 import axios from 'axios';
-
+import { useStore } from 'vuex';
+const store = useStore();
 //定义表单数据接口
 interface LoginForm {
   username: string,
@@ -75,6 +76,8 @@ const Login = async (formEl: FormInstance | undefined) => {
           ElMessage({
             message: '成功登录！', type: 'success',
           });
+          // 将用户名存储到 Vuex store 中
+          store.commit('updateUsername', keyValidateForm.username);
           router.push({path: '/loginhome'});
       }
       else {

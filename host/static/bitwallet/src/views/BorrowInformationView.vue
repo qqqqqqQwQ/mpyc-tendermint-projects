@@ -7,14 +7,14 @@
           <CommonAside />
         </el-aside> -->
         <el-container>
-          <el-header class="header" height="90px">
+          <!-- <el-header class="header" height="90px">
             <CommonHead />
 
-          </el-header>
-          <!-- <el-header class="header" height="90px">
+          </el-header> -->
+          <el-header class="header" height="90px">
             <LoginHead />
 
-          </el-header> -->
+          </el-header>
           <el-main class="main">
             <img class="background-image"/>
             <div class="text-container">

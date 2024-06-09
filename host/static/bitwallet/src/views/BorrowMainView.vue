@@ -6,12 +6,12 @@
           <CommonAside />
         </el-aside> -->
         <el-container>
-          <el-header class="header" height="90px">
-            <CommonHead />
-          </el-header>
           <!-- <el-header class="header" height="90px">
-            <LoginHead />
+            <CommonHead />
           </el-header> -->
+          <el-header class="header" height="90px">
+            <LoginHead />
+          </el-header>
           <el-main class="main">
             <img class="background-image" />
             <el-table :data="tableData" style="width: 100%" class="table-container">
