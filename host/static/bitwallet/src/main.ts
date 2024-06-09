@@ -18,4 +18,3 @@ app.config.globalProperties.$api=api
 app.provide("$axios", axios);
 
 app.mount("#app");
- 

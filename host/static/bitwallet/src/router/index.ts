@@ -58,6 +58,31 @@ const routes: Array<RouteRecordRaw> = [
     name: "evaluation",
     component: () => import("@/views/EvaluationView.vue"),
   },
+  {
+    path: "/borrowinformation",
+    name: "borrowinformation",
+    component: () => import("@/views/BorrowInformationView.vue"),
+  },
+  {
+    path: "/borrowmain",
+    name: "borrowmain",
+    component: () => import("@/views/BorrowMainView.vue"),
+  },
+  {
+    path: "/modelfunction",
+    name: "modelfunction",
+    component: () => import("@/views/ModelFunctionView.vue"),
+  },
+  {
+    path: "/selectmodel",
+    name: "selectmodel",
+    component: () => import("@/views/SelectModelView.vue"),
+  },
+  {
+    path: "/submitdeposit",
+    name: "submitdeposit",
+    component: () => import("@/views/SubmitDepositView.vue"),
+  },
   // {
   //   path: '/register',
   //   name: 'register',

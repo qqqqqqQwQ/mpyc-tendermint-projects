@@ -33,4 +33,4 @@ import LoginHead from "@/components/LoginHeader.vue";
 
 </script>
 
-<style></style>
+<style scoped></style>

@@ -15,7 +15,7 @@
             <el-icon><home-filled /></el-icon>
             <template #title>{{ item.label }}</template>
         </el-menu-item>
-
+<!--
         <el-menu-item @click="clickMenu(item)" v-for=" item in eInfo" :key="item.name" :index="item.name">
             <el-icon>
                 <Avatar />
@@ -51,7 +51,7 @@
             </el-icon>
             <template #title>{{ item.label }}</template>
         </el-menu-item>
-
+  -->
         <el-button type="primary" size="large" plain @click="clickLogin()">登录</el-button>
         <el-button type="default" size="large" plain @click="clickRegister()">注册</el-button>
     </el-menu>
