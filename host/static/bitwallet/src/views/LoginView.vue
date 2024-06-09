@@ -54,7 +54,7 @@ const keyValidateForm = reactive<LoginForm>({
 const rules = reactive({
   username: [
     { required: true, message: '请输入你的用户名', trigger: 'blur' },
-    { min: 5, max: 20, message: '账户不能为空', trigger: 'blur' },
+    { min: 1, max: 20, message: '账户不能为空', trigger: 'blur' },
   ],
   password: [
     { required: true, message: '请输入你的密码', trigger: 'blur' },
