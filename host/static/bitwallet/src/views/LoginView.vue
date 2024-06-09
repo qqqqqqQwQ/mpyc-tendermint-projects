@@ -32,6 +32,7 @@ import type { FormInstance, FormRules } from 'element-plus'
 import { defineProps } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessage, LAST_KEYS } from 'element-plus';
+import { userData } from '@/data'
 import axios from 'axios';
 
 //定义表单数据接口
@@ -62,31 +63,32 @@ const rules = reactive({
 // 定义登录函数，通过formEl参数进行表单校验并提交登录请求
 const Login = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
+  let vv=false;
   await formEl.validate((valid, fields) => {
     if (valid) {
-      // 此处应该进行登录请求，暂时注释掉
-      // axios.post('http://localhost:3312/sys-user/login ',ruleForm).then((resp)=>{
-      //     let data=resp.data;
-      //     if(data.success) {
-
-      //     }
-      // })
-      // 输出登录成功信息，重置表单并路由跳转到首页
-      console.log('login!', keyValidateForm);
-      formEl.resetFields()
-      ElMessage({
-        message: '成功登录！',
-        type: 'success',
-      })
-      router.push({ path: '/' });
+      //vv = true;
+      let accountData = userData.users;  // 将返回的 JSON 数据赋值给 accountData
+      console.log(accountData);  // 打印 accountData 来验证结果
+      const matchingAccount = accountData.find((user: { username: string, password: string }) => user.username === keyValidateForm.username && user.password === keyValidateForm.password);
+      if (matchingAccount) {
+          // 登录成功
+          ElMessage({
+            message: '成功登录！', type: 'success',
+          });
+          router.push({path: '/loginhome'});
+      }
+      else {
+          // 登录失败
+          ElMessage({
+            message: '登陆失败,账户名或密码错误！', type: 'error',
+          });
+      }
     }
     else {
-
-      console.log('error login!', fields);
       ElMessage({
-        message: '登陆失败！',
+        message: '验证失败，请检查输入内容！',
         type: 'error',
-      })
+      });
     }
   })
 }

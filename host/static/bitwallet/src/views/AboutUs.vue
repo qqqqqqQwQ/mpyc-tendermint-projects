@@ -8,7 +8,7 @@
         </el-aside> -->
                 <el-container>
                     <el-header class="header" height="90px">
-                        <CommonHead />
+                        <LoginHead />
 
                     </el-header>
                     <!-- <el-header class="header" height="90px">
