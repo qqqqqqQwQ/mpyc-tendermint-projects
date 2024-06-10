@@ -31,10 +31,10 @@ import { defineProps } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessage, LAST_KEYS } from 'element-plus';
 import axios from 'axios';
-
+import { useStore } from 'vuex';
 const router = useRouter();
 const ruleFormRef = ref<FormInstance>()
-
+const store = useStore();
 const checkusername = (rule: any, value: any, callback: any) => {
   // if (!value) {
   //   return callback(new Error('Please input the username'))
@@ -102,6 +102,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
         message: '成功注册！',
         type: 'success',
       })
+        store.commit('updateUsername', ruleForm.username);
         router.push({path: '/loginhome'});
       })
       .catch((error) => {
