@@ -3,17 +3,17 @@ from quart import Quart, request, jsonify,send_file,redirect,url_for,make_respon
 from quart_cors import cors
 from datetime import datetime, timedelta
 from secrets import token_hex
-from unanimous.utils import get_task_status
-from unanimous import route as Unanimous
 # from mpcData import ComputeData
 from utils import dataClean,file2pd,text2model,modeltxtRecord
+from utils import text2treeArray,dataClean
+from utils.dataAnalyseBytxt import validate_dataset
 import platform
 import os
 import subprocess
 import pandas as pd
 app = Quart(__name__)
 cors(app)
-# 假设这里有一个字典，用于存储用户的目标页面信息
+# 用于存储用户的目标页面信息
 user_target_pages = {}
 
 host_path="localhost"
@@ -21,11 +21,12 @@ host_path="localhost"
 # 前端页面，返回登录页面
 @app.route('/',methods=['GET'])
 async def dddd():
-    # auth_token = request.cookies.get('auth_token')
-    # if not auth_token:
-    #     return redirect(url_for('login'))
-    # else:
-    return redirect(url_for('id3gini'))
+    auth_token = request.cookies.get('auth_token')
+    if not auth_token:
+        return redirect(url_for('login'))
+    else:
+        return redirect(url_for('id3gini'))
+    # return redirect(url_for('login'))
 @app.route('/login',methods=['GET'])
 async def login():
     auth_token = request.cookies.get('auth_token')
@@ -33,6 +34,7 @@ async def login():
         return await send_file('static/login.html')
     else:
         return redirect(url_for('id3gini'))
+    # return await send_file('static/login.html')
 
 @app.route('/id3gini', methods=['GET'])
 async def id3gini():
@@ -44,21 +46,21 @@ async def id3gini():
 # 登录接口
 @app.route('/login', methods=['POST'])
 async def login_post():
-    # 假设这里是验证用户登录的逻辑
+    # 这里是验证用户登录的逻辑
     data = await request.get_json()
     client_key = data.get('client_key')
     redirect_url = data.get('redirect_url')
     # client_is_exist, client_name = ComputeData.checkClientKey(data)
-    client_is_exist, client_name = 1,1
+    client_is_exist, client_name = 1,"test"
     print("client_is_exist:",client_is_exist)
     if client_is_exist==1:
-        # 处理用户登录逻辑，验证用户名密码等
-        # 假设验证成功，设置认证cookie等操作
+        # 处理用户登录逻辑，验证用户密钥
+        # 验证成功，设置认证cookie
         auth_token = token_hex(16)  # 生成随机的复杂字符串作为 auth_token
         expire_time = datetime.now() + timedelta(hours=1)  # 设置过期时间为 1 小时后
-
         # 创建响应对象
-        response =await make_response(jsonify({'auth_token': auth_token}))
+        response =await make_response(jsonify({'auth_token': auth_token,'client_key':client_key}))
+        # response =await make_response(jsonify({'auth_token': "test",'client_key':client_key}))
 
         # 设置认证cookie
         response.set_cookie('auth_token', auth_token)
@@ -86,16 +88,14 @@ async def logout():
     return response
 
 @app.route('/id3gini/compute', methods=['POST'])
-async def test():
+async def compute():
     try:
         file_path = os.path.join(os.getcwd(), 'id3gini', 'data', 'id3', 'loan_predication.csv')
         file = (await request.files)['file']
         print("接收到前端的数据，", file)
         data = file2pd.process_file(file)
-        # data = pd.DataFrame(data)
         # 将数据处理好后放进文件夹中可以直接被id3gini调用
         dataClean.process_excel_file(data).to_csv(file_path, index=False)
-
         # 以下是多方计算
         folder_path='id3gini'
         current_os = platform.system()
@@ -103,7 +103,6 @@ async def test():
         task_num=7
         # python_command = f"python {folder_path} -M{party_num} -I{index} {party_vote} -C party{party_num}_{index}.ini"
         python_command = f"python id3gini.py -i {task_num}"
-
         if current_os == "Windows":
             command = f"cd /d {folder_path} && {python_command}"
         else:
@@ -124,19 +123,64 @@ async def test():
         outputInLines.pop() # 弹出第一行空格
         output = '\n'.join(outputInLines)
         print("计算结果：", output)
-
-        # features = ['Credit_History', 'Self_Employed', 'ApplicantIncome', 'LoanAmount', 'CoapplicantIncome','Property_Area', 'Education', 'Dependents', 'Gender', 'Married']
         features=['Gender','Married','Dependents','Education','Self_Employed','ApplicantIncome','CoapplicantIncome','LoanAmount','Loan_Amount_Term','Credit_History','Property_Area']
-        # 尝试将结果变成决策树模型
-        # text2model.saveModel(output,features)
-        modeltxtRecord.save_txt_file(output)
-        return jsonify({'code': 200, 'data': output})
+        filepath=modeltxtRecord.save_txt_file(output)
+        print(filepath)
+        # return jsonify({'code': 200, 'data': output})
+
+        # 检查文件是否存在
+        if os.path.exists(filepath):
+            # 使用 send_file 返回文件，并设置 as_attachment=True 以指示浏览器下载文件
+            print("11")
+            return await send_file(filepath, as_attachment=True)
+        else:
+            print("22")
+            return "File not found", 404
     except Exception as e:
         print(e)  # 打印错误信息
         return jsonify({'code':500, 'message':str(e)})
 
+@app.route('/id3gini/test',methods=['POST'])
+async def id3gini_test():
+    try:
+        file_path = os.path.join(os.getcwd(), 'id3gini', 'data', 'id3', 'loan_predication_check.csv')
+        file = (await request.files)['file']
+        print("接收到前端的数据，", file)
+        data = file2pd.process_file(file)
+        # 将数据处理好后放进文件夹中可以直接被id3gini调用
+        dataClean.process_excel_file(data).to_csv(file_path, index=False)
+        # 以下是评估数据
+        model_path = "models/model_txts/loan_predication_tree_2024-05-08_21-55-29.txt"
+        data_path = file_path
+        # data_path= "mpcData/loan_predication_test.csv"
 
+        with open(model_path, 'r') as file:
+            tree_text = file.read()
+        decision_tree = text2treeArray.parse_tree(tree_text)
+        # 读取数据
+        data = pd.read_csv(data_path)
+        dataset = dataClean.process_excel_file(data)
+        # 使用 validate_dataset 函数对数据集进行验证
+        loan_status_result = dataset['Loan_Status'].values
+        print(loan_status_result)
+        predictions = validate_dataset(dataset, decision_tree)
+        print(predictions)
 
+        # 初始化准确度计数器
+        accuracy_count = 0
+
+        # 比较两个数组对应位置的值
+        for i in range(len(loan_status_result)):
+            if loan_status_result[i] == predictions[i]:
+                accuracy_count += 1
+
+        # 计算准确度
+        accuracy = accuracy_count / len(loan_status_result) * 100
+        print("模型训练结果的准确度为: {:.2f}%".format(accuracy))
+        return jsonify({'code': 200, 'message': predictions})
+    except Exception as e:
+        print(e)  # 打印错误信息
+        return jsonify({'code': 500, 'message': str(e)})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=18088, debug=True)  # 在端口8088上运行服务

@@ -1,0 +1,65 @@
+
+if Credit_History == : Y
+if Credit_History == 0: 
+|   if ApplicantIncome == B: N
+|   if ApplicantIncome == C: N
+|   if ApplicantIncome == D: N
+|   if ApplicantIncome == E: Y
+|   if ApplicantIncome == F: N
+|   if ApplicantIncome == G: N
+|   if ApplicantIncome == H: N
+|   if ApplicantIncome == I: N
+|   if ApplicantIncome == J: N
+|   if ApplicantIncome == K: N
+|   if ApplicantIncome == L: N
+|   if ApplicantIncome == M: N
+if Credit_History == 1: 
+|   if CoapplicantIncome == A: 
+|   |   if ApplicantIncome == B: Y
+|   |   if ApplicantIncome == C: 
+|   |   |   if Dependents == : Y
+|   |   |   if Dependents == 0: 
+|   |   |   |   if Gender == : N
+|   |   |   |   if Gender == Female: 
+|   |   |   |   |   if Property_Area == Rural: Y
+|   |   |   |   |   if Property_Area == Semiurban: Y
+|   |   |   |   |   if Property_Area == Urban: Y
+|   |   |   |   if Gender == Male: N
+|   |   |   if Dependents == 1: N
+|   |   |   if Dependents == 2: N
+|   |   |   if Dependents == 3+: N
+|   |   if ApplicantIncome == D: 
+|   |   |   if LoanAmount == : N
+|   |   |   if LoanAmount == A: N
+|   |   |   if LoanAmount == B: Y
+|   |   |   if LoanAmount == C: N
+|   |   |   if LoanAmount == D: N
+|   |   |   if LoanAmount == E: N
+|   |   |   if LoanAmount == F: N
+|   |   if ApplicantIncome == E: Y
+|   |   if ApplicantIncome == F: Y
+|   |   if ApplicantIncome == G: Y
+|   |   if ApplicantIncome == H: N
+|   |   if ApplicantIncome == I: N
+|   |   if ApplicantIncome == J: Y
+|   |   if ApplicantIncome == K: N
+|   |   if ApplicantIncome == L: Y
+|   |   if ApplicantIncome == M: N
+|   if CoapplicantIncome == B: 
+|   |   if Dependents == : Y
+|   |   if Dependents == 0: 
+|   |   |   if Gender == : N
+|   |   |   if Gender == Female: Y
+|   |   |   if Gender == Male: Y
+|   |   if Dependents == 1: Y
+|   |   if Dependents == 2: Y
+|   |   if Dependents == 3+: N
+|   if CoapplicantIncome == C: 
+|   |   if Gender == : N
+|   |   if Gender == Female: N
+|   |   if Gender == Male: Y
+|   if CoapplicantIncome == D: Y
+|   if CoapplicantIncome == E: Y
+|   if CoapplicantIncome == F: N
+|   if CoapplicantIncome == G: Y
+|   if CoapplicantIncome == H: Y

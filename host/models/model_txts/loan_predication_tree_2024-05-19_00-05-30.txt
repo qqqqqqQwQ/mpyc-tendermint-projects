@@ -1,0 +1,20 @@
+
+if Credit_History == : 
+|   if Married == : N
+|   if Married == No: N
+|   if Married == Yes: Y
+if Credit_History == 0: N
+if Credit_History == 1: 
+|   if LoanAmount == : Y
+|   if LoanAmount == A: 
+|   |   if ApplicantIncome == B: Y
+|   |   if ApplicantIncome == C: Y
+|   |   if ApplicantIncome == D: N
+|   |   if ApplicantIncome == E: N
+|   |   if ApplicantIncome == F: N
+|   |   if ApplicantIncome == G: N
+|   |   if ApplicantIncome == H: N
+|   |   if ApplicantIncome == I: N
+|   |   if ApplicantIncome == K: Y
+|   |   if ApplicantIncome == M: N
+|   if LoanAmount == B: Y

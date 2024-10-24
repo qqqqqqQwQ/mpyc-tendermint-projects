@@ -498,3 +498,118 @@ Female,Yes,1,Graduate,No,D,A,B,A,1,Semiurban,Y
 Male,Yes,0,Not Graduate,No,C,B,B,C,1,Rural,Y
 Male,Yes,0,Graduate,No,E,C,B,A,,Urban,Y
 Male,Yes,1,Graduate,Yes,C,A,A,C,1,Semiurban,Y
+Male,No,0,Graduate,No,G,E,C,C,0,Rural,N
+Female,No,0,Graduate,No,A,D,B,C,1,Rural,Y
+Female,No,0,Graduate,No,D,A,B,C,1,Semiurban,Y
+Male,Yes,2,Graduate,No,E,F,C,C,1,Semiurban,Y
+Male,Yes,1,Not Graduate,No,E,F,B,C,,Rural,N
+Male,Yes,0,Not Graduate,No,D,B,B,B,1,Semiurban,Y
+Male,Yes,2,Graduate,No,D,E,C,C,1,Rural,Y
+Male,Yes,0,Graduate,No,M,G,E,C,,Urban,Y
+,No,0,Graduate,No,D,A,A,C,1,Urban,N
+Male,Yes,0,Graduate,Yes,C,D,B,C,1,Urban,Y
+Female,No,1,Graduate,No,K,A,A,C,1,Urban,Y
+Male,No,0,Not Graduate,No,D,B,B,C,1,Rural,N
+Male,Yes,1,Graduate,No,G,C,C,C,1,Semiurban,Y
+Male,Yes,2,Graduate,No,D,C,B,C,1,Urban,Y
+Male,Yes,0,Graduate,No,C,G,A,B,1,Semiurban,N
+Male,No,0,Graduate,No,F,D,D,C,1,Rural,N
+Male,Yes,3+,Graduate,No,D,D,B,C,1,Rural,Y
+Female,Yes,2,Graduate,No,C,B,B,C,1,Semiurban,Y
+Male,Yes,,Not Graduate,No,D,B,B,C,0,Semiurban,N
+Male,No,0,Graduate,No,E,B,B,C,1,Semiurban,N
+Female,No,0,Not Graduate,No,D,A,A,C,1,Rural,N
+Male,Yes,2,Not Graduate,No,C,B,A,C,1,Semiurban,Y
+Male,No,0,Graduate,No,C,A,A,C,1,Semiurban,Y
+Male,Yes,3+,Graduate,Yes,F,B,B,C,1,Rural,Y
+Male,Yes,2,Graduate,Yes,H,H,E,C,1,Rural,Y
+Male,No,0,Graduate,No,E,C,,C,1,Semiurban,N
+Male,Yes,2,Graduate,Yes,L,A,E,C,1,Rural,Y
+Male,Yes,0,Graduate,No,D,A,B,C,1,Semiurban,Y
+Male,Yes,1,Not Graduate,No,F,B,B,C,0,Semiurban,Y
+Male,No,1,Not Graduate,No,C,B,A,C,1,Semiurban,Y
+Male,No,0,Not Graduate,No,G,A,B,C,1,Semiurban,Y
+Male,Yes,0,Graduate,No,B,F,C,C,,Rural,Y
+Male,Yes,3+,Graduate,No,E,A,B,C,1,Urban,Y
+Male,No,2,Graduate,No,D,A,B,C,0,Rural,N
+Male,No,1,Graduate,No,K,A,B,C,,Semiurban,N
+Female,No,0,Not Graduate,Yes,L,A,B,C,1,Urban,Y
+Male,No,0,Not Graduate,,C,C,B,C,1,Rural,Y
+Male,Yes,0,Graduate,No,G,D,D,C,1,Urban,Y
+Male,No,2,Graduate,No,D,A,B,C,1,Semiurban,Y
+Male,Yes,0,Not Graduate,No,C,A,A,C,1,Rural,N
+Male,Yes,3+,Graduate,No,G,A,B,B,1,Rural,Y
+Female,Yes,1,Graduate,No,E,C,B,B,1,Semiurban,Y
+Female,No,0,Graduate,No,C,A,A,C,0,Semiurban,N
+Female,No,1,Graduate,,D,A,A,C,1,Semiurban,Y
+Male,Yes,1,Not Graduate,No,C,C,B,C,1,Urban,Y
+Female,Yes,0,Not Graduate,No,D,A,B,C,,Semiurban,Y
+Male,Yes,0,Graduate,No,C,B,B,C,1,Rural,Y
+Male,No,0,Not Graduate,No,D,A,A,A,1,Semiurban,N
+Male,No,0,Graduate,No,C,B,B,C,1,Rural,Y
+Female,No,0,Graduate,No,F,A,B,C,0,Semiurban,N
+Male,Yes,0,Graduate,No,C,C,B,C,1,Rural,Y
+Male,Yes,2,Graduate,Yes,G,A,,C,0,Rural,N
+Male,Yes,1,Not Graduate,No,C,C,,C,1,Rural,Y
+Male,Yes,1,Graduate,No,D,D,B,C,1,Urban,Y
+Male,Yes,0,Not Graduate,No,C,C,B,C,0,Urban,N
+Male,Yes,0,Graduate,No,D,E,B,B,0,Rural,N
+Male,Yes,1,Graduate,No,F,B,A,C,1,Semiurban,Y
+Female,No,0,Graduate,No,C,B,A,C,,Urban,Y
+Male,Yes,3+,Graduate,Yes,K,A,C,C,1,Semiurban,Y
+Male,Yes,0,Graduate,No,D,C,B,C,1,Semiurban,Y
+Female,Yes,0,Graduate,No,E,C,B,C,1,Semiurban,Y
+Male,Yes,2,Not Graduate,No,D,A,B,C,1,Semiurban,Y
+Female,Yes,1,Graduate,Yes,L,A,G,C,1,Semiurban,Y
+Male,Yes,0,Graduate,No,F,C,C,C,1,Rural,Y
+Male,No,0,Not Graduate,Yes,F,A,B,C,1,Semiurban,Y
+Male,Yes,2,Graduate,No,I,A,C,C,0,Urban,N
+Male,Yes,0,Not Graduate,No,E,A,B,C,,Rural,Y
+Male,No,0,Graduate,No,D,A,A,C,1,Urban,Y
+Male,Yes,3+,Graduate,No,D,C,B,C,0,Rural,N
+Female,No,0,Graduate,No,C,A,A,C,1,Urban,N
+Male,Yes,0,Graduate,No,D,C,B,C,0,Urban,N
+Male,Yes,1,Graduate,No,D,B,B,C,1,Urban,Y
+Male,Yes,,Graduate,No,F,B,B,C,0,Urban,N
+Male,Yes,2,Graduate,No,L,A,C,C,1,Urban,Y
+Male,Yes,2,Not Graduate,No,G,B,B,C,1,Semiurban,N
+Male,Yes,3+,Graduate,No,G,A,B,C,1,Semiurban,N
+Male,Yes,2,Graduate,No,D,A,B,A,1,Urban,Y
+,Yes,0,Graduate,No,D,C,B,C,0,Semiurban,N
+Male,No,0,Graduate,No,D,C,B,C,1,Urban,Y
+Male,Yes,1,Graduate,No,B,C,B,C,1,Rural,Y
+Male,No,0,Graduate,,D,C,B,C,1,Urban,Y
+Male,Yes,2,Graduate,No,G,A,C,C,1,Semiurban,Y
+Male,No,0,Graduate,No,B,M,A,C,1,Urban,N
+Female,Yes,0,Graduate,No,D,A,A,C,1,Semiurban,Y
+Male,Yes,1,Graduate,No,B,A,A,C,,Rural,N
+Male,Yes,1,Graduate,No,C,B,B,C,0,Rural,N
+Male,Yes,1,Graduate,No,E,D,B,A,1,Rural,N
+Male,Yes,0,Graduate,No,C,B,B,C,1,Urban,Y
+Female,No,0,Not Graduate,No,C,A,A,C,1,Semiurban,Y
+,No,0,Graduate,No,E,A,A,C,1,Semiurban,Y
+Male,Yes,2,Graduate,Yes,C,A,B,C,0,Semiurban,N
+Male,Yes,0,Graduate,No,D,D,A,B,1,Semiurban,Y
+Male,Yes,2,Graduate,Yes,G,A,C,B,1,Semiurban,N
+,No,3+,Graduate,Yes,J,A,C,C,1,Semiurban,Y
+Male,Yes,0,Graduate,No,D,D,B,B,1,Rural,Y
+Male,Yes,0,Graduate,Yes,L,A,C,C,1,Urban,Y
+Male,No,0,Not Graduate,No,D,A,B,C,1,Rural,Y
+Male,Yes,2,Not Graduate,Yes,G,B,B,C,1,Rural,N
+Male,No,,Graduate,No,C,A,A,C,0,Semiurban,N
+Male,Yes,0,Graduate,Yes,J,A,B,C,1,Rural,Y
+Male,Yes,2,Graduate,No,F,A,B,C,1,Urban,Y
+Female,No,3+,Graduate,,A,M,D,B,,Urban,N
+Male,Yes,0,Not Graduate,,C,C,B,C,1,Rural,Y
+Male,Yes,3+,Graduate,No,F,A,B,C,1,Urban,Y
+Male,No,0,Graduate,No,D,E,B,C,1,Rural,Y
+Female,Yes,1,Graduate,No,K,A,E,C,1,Semiurban,Y
+Male,Yes,0,Not Graduate,No,C,D,,B,1,Urban,N
+Male,Yes,1,Graduate,No,D,C,B,C,1,Semiurban,Y
+Male,Yes,2,Not Graduate,No,D,B,B,C,1,Rural,Y
+Male,Yes,0,Graduate,No,D,B,B,C,1,Rural,Y
+Female,No,0,Graduate,No,C,A,A,C,1,Rural,Y
+Male,Yes,3+,Graduate,No,E,A,A,B,1,Rural,Y
+Male,Yes,1,Graduate,No,I,A,C,C,1,Urban,Y
+Male,Yes,2,Graduate,No,H,A,B,C,1,Urban,Y
+Female,No,0,Graduate,Yes,E,A,B,C,0,Semiurban,N

@@ -80,7 +80,8 @@
     <form id="uploadForm" enctype="multipart/form-data">
         <input type="file" name="file" id="file"><br>
     </form>
-    <input type="button" value="开始计算" onclick="compute()" class="toggleBtn">
+    <input type="button" value="开始训练" onclick="compute()" class="toggleBtn">
+    <input type="button" value="开始测试" onclick="compute2()" class="toggleBtn">
 
     <div>----------返回结果--------</div>
     <br>
@@ -138,6 +139,56 @@ function compute(){
     document.getElementById("response").innerText=document.getElementById("response").innerText+"       计算中，请等待..."
     // 构建请求 URL
     var url = `http://localhost:18088/id3gini/compute`;
+    // 获取文件和其他数据
+    var file = document.getElementById('file').files[0];
+
+    // 创建 FormData 对象
+    var formData = new FormData();
+    formData.append('file', file);
+
+            // 发送 POST 请求
+    axios.post(url, formData)
+        .then(function(response) {
+            console.log(response.data)
+        // 检查响应数据中的 code
+        // if (response.data.code === 200) {
+        //     // 请求成功，处理响应数据
+        //     document.getElementById("response").innerText = JSON.stringify(response.data.data);
+        // } else {
+        //     // 请求失败，显示错误信息
+        //     console.error('Error:', response.data.message);
+        // }
+            var blob = new Blob([response.data], { type: 'application/octet-stream' });
+
+            // 使用 URL.createObjectURL() 创建一个 URL 对象
+            var url = window.URL.createObjectURL(blob);
+
+            // 创建一个隐藏的<a>元素，设置其属性，然后模拟点击以下载文件
+            var a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = "信贷评估模型.txt";
+            document.body.appendChild(a);
+            a.click();
+
+            // 清理
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+    })
+    .catch(function(error) {
+        // 请求出错，显示错误信息
+        console.error('Error:', error);
+    });
+}
+function compute2(){
+    // 检查 node 中是否有数据
+    // if (Object.keys(node).length === 0) {
+    //     console.error('Error: No data available in node.');
+    //     return;
+    // }
+    document.getElementById("response").innerText=document.getElementById("response").innerText+"       计算中，请等待..."
+    // 构建请求 URL
+    var url = `http://localhost:18088/id3gini/test`;
     // 获取文件和其他数据
     var file = document.getElementById('file').files[0];
 

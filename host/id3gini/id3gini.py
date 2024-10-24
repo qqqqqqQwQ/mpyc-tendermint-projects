@@ -145,7 +145,7 @@ async def main():
     args = parser.parse_args()
 
     settings = [('tennis', 32), ('balance-scale', 77), ('car', 95),
-                ('SPECT', 42), ('KRKPA7', 69), ('tic-tac-toe', 75), ('house-votes-84', 62),('loan_predication',300)]
+                ('SPECT', 42), ('KRKPA7', 69), ('tic-tac-toe', 75), ('house-votes-84', 62),('loan_predication',600)]
     name, bit_length = settings[args.dataset]
     if args.bit_length:
         bit_length = args.bit_length

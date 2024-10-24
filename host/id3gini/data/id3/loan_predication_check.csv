@@ -1,0 +1,31 @@
+Gender,Married,Dependents,Education,Self_Employed,ApplicantIncome,CoapplicantIncome,LoanAmount,Loan_Amount_Term,Credit_History,Property_Area,Loan_Status
+Male,Yes,0,Graduate,No,F,A,B,C,1,Rural,Y
+Female,No,0,Not Graduate,No,C,A,A,,0,Urban,N
+Male,Yes,0,Graduate,No,B,B,B,C,1,Urban,Y
+Male,Yes,1,Graduate,No,H,B,B,,0,Urban,N
+Male,Yes,0,Graduate,No,K,A,A,C,1,Semiurban,Y
+Male,Yes,0,Graduate,No,C,E,B,C,1,Rural,Y
+Female,No,1,Not Graduate,No,E,A,A,C,1,Rural,N
+Male,Yes,2,Graduate,No,F,A,B,C,1,Semiurban,Y
+Male,Yes,0,Graduate,No,C,A,A,C,1,Rural,Y
+Male,No,0,Not Graduate,No,C,A,A,B,1,Urban,Y
+Female,No,1,Graduate,Yes,I,A,B,C,1,Semiurban,Y
+Male,No,0,Graduate,No,G,A,B,C,0,Rural,N
+Male,No,0,Graduate,,K,A,E,C,1,Semiurban,Y
+Male,Yes,0,Graduate,No,C,C,B,C,1,Semiurban,Y
+Male,No,0,Graduate,No,D,A,B,C,1,Urban,Y
+Female,,,Graduate,No,K,A,,B,1,Semiurban,Y
+Male,No,0,Graduate,No,B,B,A,C,1,Semiurban,Y
+Male,Yes,0,Graduate,No,C,B,,C,1,Urban,Y
+Male,No,0,Graduate,Yes,K,A,B,C,0,Urban,N
+Female,Yes,0,Not Graduate,Yes,H,A,B,C,1,Rural,Y
+Male,No,0,Graduate,No,D,F,B,C,1,Semiurban,Y
+Male,Yes,0,Graduate,No,H,B,B,C,1,Rural,Y
+Male,No,3+,Not Graduate,No,E,B,B,C,1,Semiurban,Y
+Male,No,1,Graduate,No,M,A,B,C,1,Semiurban,Y
+Male,Yes,0,Graduate,No,H,I,B,B,,Rural,Y
+Male,Yes,1,Graduate,Yes,D,B,B,C,1,Rural,Y
+Male,Yes,2,Not Graduate,No,E,A,B,C,1,Rural,Y
+Male,Yes,0,Graduate,,D,B,A,C,1,Rural,N
+Male,Yes,2,Graduate,No,D,B,B,C,0,Rural,N
+Male,No,1,Not Graduate,Yes,C,B,B,C,,Semiurban,N
