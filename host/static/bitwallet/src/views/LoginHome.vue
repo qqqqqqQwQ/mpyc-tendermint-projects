@@ -7,14 +7,14 @@
           <CommonAside />
         </el-aside> -->
         <el-container>
-          <el-header class="header" height="90px">
-            <CommonHead />
+<!--          <el-header class="header" height="90px">-->
+<!--            <CommonHead />-->
 
-          </el-header>
-          <!-- <el-header class="header" height="90px">
+<!--          </el-header>-->
+          <el-header class="header" height="90px">
             <LoginHead />
 
-          </el-header> -->
+          </el-header>
           <el-main class="main">
             <img class="background-image"/>
             <img class="info_image" src="../images/main_info.jpg" alt="Element logo" />
@@ -46,7 +46,7 @@ import LoginHead from "@/components/LoginHeader.vue";
   height: 84px; /* 元素高度 */
 }
 .info_image{
-  width: 100%; 
+  width: 100%;
   height: 75%;
 }
 </style>

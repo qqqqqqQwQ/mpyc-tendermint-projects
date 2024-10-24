@@ -2,7 +2,7 @@
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false"
         @select="handleSelect">
         <el-menu-item index="0">
-            <img style="width: 200px" src="@/images/element-plus-logo.svg" alt="Element logo" />
+            <img style="width: 90px; height: 90px" src="@/images/SMPC.jpg" alt="Element logo" />
         </el-menu-item>
         <div class="flex-grow" />
 
@@ -56,7 +56,7 @@
         <div class="">
             <el-dropdown :hide-on-click="false">
                 <span class="el-dropdown-link">
-                    <img class="user-headphoto" src="@/images/user_headphoto.jpg">
+                    <img class="user-headphoto" :src="getImgSrc('user_headphoto')" alt="头像" />
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
@@ -88,6 +88,12 @@ import {
     Avatar,
     Promotion,
 } from '@element-plus/icons-vue'
+//头像实例
+//const imgSrc = require("@/images/user_headphoto.jpg")
+const getImgSrc = (user:string) => {
+    return new URL(`../images/${user}.jpg`, import.meta.url).href;//注意是反引号不是单引号
+}
+
 //使用useRouter获取路由实例
 const router = useRouter();
 const isCollapse = ref(false)

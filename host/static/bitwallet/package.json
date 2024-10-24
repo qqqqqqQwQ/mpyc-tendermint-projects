@@ -11,12 +11,14 @@
     "axios": "^1.6.8",
     "core-js": "^3.8.3",
     "element-plus": "^2.7.0",
+    "mockjs": "^1.1.0",
     "vue": "^3.2.13",
     "vue-axios": "^3.5.2",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
   },
   "devDependencies": {
+    "@types/mockjs": "^1.0.10",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",
